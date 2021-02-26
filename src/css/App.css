@@ -1,0 +1,15 @@
+.App {
+  text-align: center;
+}
+a {
+  text-decoration: none;
+}
+
+.homeContainer {           
+	  background-image: url('https://fashionista.com/.image/t_share/MTM5NDU0OTMzODExMzQwNDUy/kl1_0420jpg.jpg') !important;
+		  background-size: cover !important;
+}
+
+.homeMenu {                
+	  background-color: #FFF !important;
+}
