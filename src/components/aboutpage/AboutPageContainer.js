@@ -1,15 +1,17 @@
 import React from "react";
-import Header from "../../common/Header";
-import Footer from "../../common/Footer";
 import AboutBody from "./AboutBody";
+import Banner from '../../common/Banner';
+import HeaderComponent from '../../common/HeaderComponent';
+import NewFooter from '../../common/NewFooter';
 
 function AboutPageContainer() {
   return (
-    <div className="container">
-      <Header />
-      <AboutBody />
-      <Footer />
-    </div>
+    <React.Fragment>
+			<HeaderComponent>
+			<AboutBody />
+			<NewFooter />
+			</HeaderComponent>
+    </React.Fragment>
   );
 }
 export default AboutPageContainer;

@@ -13,3 +13,8 @@ a {
 .homeMenu {                
 	  background-color: #FFF !important;
 }
+
+.mobilebanner {           
+	  background-image: url('../images/molior7.png') !important;
+		background-size: cover !important;
+}

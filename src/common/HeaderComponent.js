@@ -21,47 +21,12 @@ const { MediaContextProvider, Media } = createMedia({
   },
 })
 
-const BannerText = ({ mobile }) => (
-  <Container text  style={ mobile ? null : {backgroundColor: 'rgba(0,0,0,0.2)', position: 'relative', left: '375px', top: '150px'}}>
-    <Header
-      as='h1'
-      content='Molior Boutique'
-      inverted
-      style={{
-        fontSize: mobile ? '2em' : '4em',
-        fontWeight: 'normal',
-        marginBottom: 0,
-        marginTop: mobile ? '1.5em' : '3em',
-				color: '#FFF' ,
-      }}
-    />
-    <Header
-      as='h2'
-      content='2021 Bahar ve Yaz Koleksiyonu'
-      inverted
-      style={{
-        fontSize: mobile ? '1.5em' : '1.8em',
-        fontWeight: 'normal',
-        marginTop: mobile ? '0.5em' : '1.5em',
-				color: '#FFF' ,
-      }}
-    />
-    <Button color='white' size='huge' style={{marginTop: '80px'}}>
-     Alışverişe Başla 
-      <Icon name='right arrow' />
-    </Button>
-  </Container>
-)
-
-BannerText.propTypes = {
-  mobile: PropTypes.bool,
-}
 
 /* Heads up!
  * Neither Semantic UI nor Semantic UI React offer a responsive navbar, however, it can be implemented easily.
  * It can be more complicated, but you can create really flexible markup.
  */
-const DesktopContainer = ({Child}) => {
+const DesktopContainer = ({children}) => {
 	const [state, setState] = useState({})
 
   const hideFixedMenu = () => setState({ fixed: false })
@@ -76,13 +41,6 @@ const DesktopContainer = ({Child}) => {
           onBottomPassed={showFixedMenu}
           onBottomPassedReverse={hideFixedMenu}
         >
-			  <Segment
-					inverted
-					className='homeContainer'
-					textAlign='center'
-					style={{ minHeight: 700, padding: '1em 0em'  }}
-					vertical
-				>
             <Menu
 							className='homeMenu'
               fixed={'top'}
@@ -97,7 +55,7 @@ const DesktopContainer = ({Child}) => {
                 <Menu.Item as={Link} to='/elbise'>Elbise</Menu.Item>
                 <Menu.Item as={Link} to='/ust-giyim'>Üst Giyim</Menu.Item>
                 <Menu.Item as={Link} to='/alt-giyim'>Alt Giyim</Menu.Item>
-								<Menu.Item as={Link} to='/indirimli-urunler'>İndirimli Ürünler</Menu.Item>
+                <Menu.Item as={Link} to='/indirimli-urunler'>İndirimli Ürünler</Menu.Item>
                 <Menu.Item position='right'>
                   <Button as={Link} to='/' icon='search' style={{ marginLeft: '0.5em', paddingLeft: '18px', paddingRight: '18px' }}>
                   </Button>
@@ -106,19 +64,17 @@ const DesktopContainer = ({Child}) => {
                 </Menu.Item>
               </Container>
             </Menu>
-					<BannerText />
-				</Segment>
         </Visibility>
-				<Child />
+				{children}
       </Media>
     )
   }
 
 DesktopContainer.propTypes = {
-  Child: PropTypes.element,
+  children: PropTypes.node,
 }
 
-const MobileContainer = ({Child}) => {
+const MobileContainer = ({children}) => {
 	const [state, setState] = useState({})
 
   const handleSidebarHide = () => setState({ sidebarOpened: false })
@@ -144,31 +100,31 @@ const MobileContainer = ({Child}) => {
             <Menu.Item as={Link} to='/elbise'>Elbise</Menu.Item>
             <Menu.Item as={Link} to='/ust-giyim'>Üst Giyim</Menu.Item>
             <Menu.Item as={Link} to='/alt-giyim'>Alt Giyim</Menu.Item>
+						<Menu.Item as={Link} to='/indirimli-urunler'>İndirimli Ürünler</Menu.Item>
           </Sidebar>
 
           <Sidebar.Pusher dimmed={sidebarOpened}>
             <Segment
               inverted
-							className='mobilebanner'
               textAlign='center'
-              style={{ minHeight: 350, padding: '1em 0em' }}
+              style={{ minHeight: 90, padding: '1em 0em' }}
               vertical
             >
               <Container>
-                <Menu pointing secondary size='large'>
+                <Menu inverted pointing secondary size='large'>
                   <Menu.Item onClick={handleToggle}>
                     <Icon name='sidebar' />
                   </Menu.Item>
                   <Menu.Item position='right'>
-                    <Button as={Link} to='/' icon='search' style={{ marginLeft: '0.5em', paddingLeft: '18px', paddingRight: '18px' }}>
+                    <Button as={Link} to='/' icon='search' inverted  style={{ marginLeft: '0.5em', paddingLeft: '18px', paddingRight: '18px' }}>
                     </Button>
-                    <Button as={Link} to='/sepet' primary icon='shopping basket' style={{ marginLeft: '0.5em', paddingLeft: '20px', paddingRight: '20px' }}>
+                    <Button as={Link} to='/sepet' icon='shopping basket' inverted style={{ marginLeft: '0.5em', paddingLeft: '20px', paddingRight: '20px' }}>
                     </Button>
                   </Menu.Item>
                 </Menu>
               </Container>
             </Segment>
-						<Child />
+					{children}
           </Sidebar.Pusher>
         </Sidebar.Pushable>
       </Media>
@@ -176,27 +132,28 @@ const MobileContainer = ({Child}) => {
 }
 
 MobileContainer.propTypes = {
-  Child: PropTypes.element,
+  children: PropTypes.node,
 }
 
-const ResponsiveContainer = ({ Child }) => (
+const ResponsiveContainer = ({ children }) => (
   /* Heads up!
    * For large applications it may not be best option to put all page into these containers at
    * they will be rendered twice for SSR.
    */
   <MediaContextProvider>
-    <DesktopContainer Child={Child} ></DesktopContainer>
-    <MobileContainer Child={Child} ></MobileContainer>
+    <DesktopContainer>{children}</DesktopContainer>
+    <MobileContainer>{children}</MobileContainer>
   </MediaContextProvider>
 )
 
 ResponsiveContainer.propTypes = {
-  Child: PropTypes.element,
+  children: PropTypes.node,
 }
 
-const HomepageLayout = ({ Child }) => (
-  <ResponsiveContainer Child={Child}>
+const HeaderComponent = ({ children }) => (
+  <ResponsiveContainer >
+		{children}
   </ResponsiveContainer>
 )
 
-export default HomepageLayout
+export default HeaderComponent

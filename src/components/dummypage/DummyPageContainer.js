@@ -1,23 +1,22 @@
 import React from "react";
 import { connect } from "react-redux";
-import Header from "../../common/Header";
-import Footer from "../../common/Footer";
+import HeaderComponent from "../../common/HeaderComponent";
+import NewFooter from "../../common/NewFooter";
 import DummyWriteComment from "./DummyWriteComment";
 import DummyShowComments from "./DummyShowComments";
 import DummyBody from "./DummyBody";
 
 const DummyPageContainer = (props) => {
   return (
-    <div className="container">
-      <Header />
+		<HeaderComponent>
       <DummyBody />
       <DummyShowComments />
       <div className="pt-5">
         <h3 className="text-center">Add a comment</h3>
         <DummyWriteComment />
       </div>
-      <Footer />
-    </div>
+      <NewFooter />
+		</HeaderComponent>
   );
 };
 

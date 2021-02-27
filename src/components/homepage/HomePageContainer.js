@@ -1,19 +1,19 @@
 import React from "react";
 import HomeBody from './HomeBody';
 import HomePageLayout from '../../common/HomePageLayout';
-import Footer from "../../common/Footer";
+import NewFooter from "../../common/NewFooter";
 
 function Container(){
 	return (
 		<React.Fragment>
 			<HomeBody />
-			<Footer />
+			<NewFooter />
 		</React.Fragment>
 	)
 }
 function HomePageContainer() {
   return (
-		<HomePageLayout Child={Container} />
+		<HomePageLayout Child={Container}  />
   );
 }
 
