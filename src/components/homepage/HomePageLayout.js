@@ -22,7 +22,7 @@ const { MediaContextProvider, Media } = createMedia({
 })
 
 const BannerText = ({ mobile }) => (
-  <Container text  style={ mobile ? null : {backgroundColor: 'rgba(0,0,0,0.2)', position: 'relative', left: '375px', top: '150px'}}>
+  <Container text  style={ mobile ? null : {backgroundColor: 'rgba(0,0,0,0.2)', position: 'relative', left: '375px', }}>
     <Header
       as='h1'
       content='Molior Boutique'
@@ -46,7 +46,7 @@ const BannerText = ({ mobile }) => (
 				color: '#FFF' ,
       }}
     />
-    <Button color='white' size='huge' style={{marginTop: '80px'}}>
+    <Button color='white' size='huge' style={{margin: '20px 0px'}}>
      Alışverişe Başla 
       <Icon name='right arrow' />
     </Button>
@@ -80,7 +80,7 @@ const DesktopContainer = ({Child}) => {
 					inverted
 					className='homeContainer'
 					textAlign='center'
-					style={{ minHeight: 700, padding: '1em 0em'  }}
+					style={{ minHeight: 500, padding: '1em 0em'  }}
 					vertical
 				>
             <Menu
@@ -96,12 +96,12 @@ const DesktopContainer = ({Child}) => {
                 </Menu.Item>
                 <Menu.Item as={Link} to='/elbise'>Elbise</Menu.Item>
                 <Menu.Item as={Link} to='/ust-giyim'>Üst Giyim</Menu.Item>
-                <Menu.Item as={Link} to='/alt-giyim'>Alt Giyim</Menu.Item>
+                <Menu.Item as={Link} to='/posts'>Alt Giyim</Menu.Item>
 								<Menu.Item as={Link} to='/indirimli-urunler'>İndirimli Ürünler</Menu.Item>
                 <Menu.Item position='right'>
                   <Button as={Link} to='/' icon='search' style={{ marginLeft: '0.5em', paddingLeft: '18px', paddingRight: '18px' }}>
                   </Button>
-                  <Button as={Link} to='/sepet' icon='shopping basket'  primary style={{ marginLeft: '0.5em', paddingLeft: '20px', paddingRight: '20px' }}>
+                  <Button as={Link} to='/sepet' icon='shopping basket' primary style={{ marginLeft: '0.5em', paddingLeft: '20px', paddingRight: '20px' }}>
                   </Button>
                 </Menu.Item>
               </Container>
@@ -143,7 +143,7 @@ const MobileContainer = ({Child}) => {
             </Menu.Item>
             <Menu.Item as={Link} to='/elbise'>Elbise</Menu.Item>
             <Menu.Item as={Link} to='/ust-giyim'>Üst Giyim</Menu.Item>
-            <Menu.Item as={Link} to='/alt-giyim'>Alt Giyim</Menu.Item>
+            <Menu.Item as={Link} to='/posts'>Alt Giyim</Menu.Item>
           </Sidebar>
 
           <Sidebar.Pusher dimmed={sidebarOpened}>

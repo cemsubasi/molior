@@ -1,13 +1,14 @@
 import React from "react";
-// import Header from "../../common/Header";
-import Footer from "../../common/Footer";
+import HeaderComponent from "../../common/HeaderComponent";
+import NewFooter from "../../common/NewFooter";
 import AlbumBody from "./AlbumBody";
 
 function AlbumPageContainer() {
   return (
-    <div className="container">
-      <AlbumBody />
-    </div>
+		<HeaderComponent >
+			<AlbumBody />
+			<NewFooter />
+		</HeaderComponent>
   );
 }
 export default AlbumPageContainer;

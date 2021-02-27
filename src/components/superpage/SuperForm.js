@@ -165,19 +165,7 @@ const SuperForm = (props) => {
 
       <div className="row m-2auto">
         <div className="col-6 p-2">
-				<label className="form-label">Thumbnail</label>
-				<select
-					className="form-select m-auto"
-					name="thumbnail"
-					value={inputState.thumbnail}
-					onChange={(e) => inputStateHandler(e)}
-					aria-label="Default select example">
-					<option value="Negro">Negro</option>
-					<option value="Punch">Punch</option>
-				</select>
-				</div>
-        <div className="col-6 p-2">
-          <label className="form-label">Post Header</label>
+          <label className="form-label">Başlık</label>
           <input
             type="text"
             className="form-control"
@@ -191,7 +179,7 @@ const SuperForm = (props) => {
       </div>
       <div className="row m-2auto">
         <div className="col-6 p-2">
-          <label className="form-label">Post Author</label>
+          <label className="form-label">İndirim</label>
           <input
             type="text"
             className="form-control"
@@ -203,7 +191,19 @@ const SuperForm = (props) => {
           />
         </div>
         <div className="col-6 p-2">
-          <label className="form-label">Post Category</label>
+          <label className="form-label">Fiyat</label>
+          <input
+            type="text"
+            className="form-control"
+            name="author"
+            value={inputState.author}
+            onChange={inputStateHandler}
+            id="exampleFormControlInput1"
+            placeholder="Author"
+          />
+        </div>
+        <div className="col-6 p-2">
+          <label className="form-label">Kategori</label>
           <input
             type="text"
             className="form-control"
@@ -215,6 +215,30 @@ const SuperForm = (props) => {
           />
         </div>
       </div>
+        <div className="col-6 p-2">
+				<label className="form-label">Beden</label>
+				<select
+					className="form-select m-auto"
+					name="thumbnail"
+					value={inputState.thumbnail}
+					onChange={(e) => inputStateHandler(e)}
+					aria-label="Default select example">
+					<option value="Negro">Negro</option>
+					<option value="Punch">Punch</option>
+				</select>
+				</div>
+        <div className="col-6 p-2">
+				<label className="form-label">Koleksiyon</label>
+				<select
+					className="form-select m-auto"
+					name="thumbnail"
+					value={inputState.thumbnail}
+					onChange={(e) => inputStateHandler(e)}
+					aria-label="Default select example">
+					<option value="Negro">Negro</option>
+					<option value="Punch">Punch</option>
+				</select>
+				</div>
       <ImageUploading
         multiple
         value={images}

@@ -5,8 +5,9 @@ a {
   text-decoration: none;
 }
 
+	  /* background-image: url('https://fashionista.com/.image/t_share/MTM5NDU0OTMzODExMzQwNDUy/kl1_0420jpg.jpg') !important; */
 .homeContainer {           
-	  background-image: url('https://fashionista.com/.image/t_share/MTM5NDU0OTMzODExMzQwNDUy/kl1_0420jpg.jpg') !important;
+	  background-image: url('../images/homecover.jpg') !important;
 		  background-size: cover !important;
 }
 

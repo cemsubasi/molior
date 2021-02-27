@@ -7,7 +7,6 @@ import {
   Grid,
   Header,
   Image,
-  List,
   Segment,
 } from 'semantic-ui-react'
 
@@ -19,12 +18,12 @@ const HomeBody = () => {
         <Grid.Row>
           <Grid.Column width={8}>
             <Header as='h3' style={{ fontSize: '2em' }}>
-              Üst Giyimde En Yeni Modeller
+              Üst Giyim
             </Header>
             <p style={{ fontSize: '1.33em' }}>
-							Beğenebileceğinizi düşündüğümüz tüm üst giyim modellerini burada topladık. 
+							Beğenebileceğinizi düşündüğümüz en yeni üst giyim modellerini burada topladık. 
             </p>
-            <Header as='h3' style={{ fontSize: '2em' }}>
+            <Header as='h3' style={{ fontSize: '1.5em' }}>
 							Tek Tek ve Özenle Seçildi
             </Header>
             <p style={{ fontSize: '1.33em' }}>

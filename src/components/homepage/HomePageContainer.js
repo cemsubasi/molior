@@ -1,6 +1,6 @@
 import React from "react";
 import HomeBody from './HomeBody';
-import HomePageLayout from '../../common/HomePageLayout';
+import HomePageLayout from './HomePageLayout';
 import NewFooter from "../../common/NewFooter";
 
 function Container(){

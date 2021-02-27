@@ -5,7 +5,6 @@ import {Link} from 'react-router-dom'
 import {
   Button,
   Container,
-  Header,
   Icon,
   Menu,
   Segment,
@@ -40,6 +39,7 @@ const DesktopContainer = ({children}) => {
           once={false}
           onBottomPassed={showFixedMenu}
           onBottomPassedReverse={hideFixedMenu}
+					style={{marginBottom: '70px',}}
         >
             <Menu
 							className='homeMenu'

@@ -1,6 +1,5 @@
 import React from "react";
 import AboutBody from "./AboutBody";
-import Banner from '../../common/Banner';
 import HeaderComponent from '../../common/HeaderComponent';
 import NewFooter from '../../common/NewFooter';
 

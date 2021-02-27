@@ -8,7 +8,7 @@ import LoginPageContainer from "./loginpage/LoginPageContainer";
 import AlbumPageContainer from "./albumpage/AlbumPageContainer";
 import AboutPageContainer from "./aboutpage/AboutPageContainer";
 import PostsPageContainer from "./postspage/PostsPageContainer";
-import Elbise from './products/Elbise';
+import ElbiseContainer from './products/ElbiseContainer';
 import Page404 from '../common/404';
 import { url3 } from "../Data";
 
@@ -21,7 +21,7 @@ const RouteComponent = (props) => {
           <Route path="/posts" children={<PostsPageContainer />} />
           <Route path="/album" children={<AlbumPageContainer />} />
           <Route path="/about" children={<AboutPageContainer />} />
-          <Route path="/elbise" children={<Elbise />} />
+          <Route path="/elbise" children={<ElbiseContainer />} />
           <Route
             path={url3}
             render={() =>
