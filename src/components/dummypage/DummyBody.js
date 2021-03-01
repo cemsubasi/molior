@@ -1,9 +1,9 @@
-import React from "react";
+import React, {useState} from "react";
 import { useParams } from "react-router-dom";
 import { connect } from "react-redux";
-import parse from "html-react-parser";
 import {Reveal, Image, Grid, Header, Button, } from 'semantic-ui-react'
 
+			// import parse from "html-react-parser";
       // <div key={item.postUrl} className="container">
       //   <div className="container pt-4 m-auto p-5">
       //     <h2 className="text-center pb-4" 
@@ -20,14 +20,16 @@ import {Reveal, Image, Grid, Header, Button, } from 'semantic-ui-react'
 
 const DummyBody = (props) => {
   let { slug } = useParams();
+	const [dummyState, setDummyState] = useState({})
+	console.log(dummyState)
   return props.state
-    .filter((item) => item.postUrl === 'slug/' + slug)
+    .filter((item) => item.productURL === 'slug/' + slug)
     .map((item) => (
-			<Grid key={item.postUrl} container stackable verticalAlign='middle' style={{margin: '20px 0px',}}>
+			<Grid key={item.productURL} container stackable verticalAlign='middle' style={{margin: '20px 0px 110px',}}>
 					<Grid.Column width={10}>
 						<Reveal animated='move right'>
 							<Reveal.Content visible>
-								<Image src='https://cdn.dsmcdn.com/mnresize/415/622/ty74/product/media/images/20210225/14/66899714/142499060/1/1_org_zoom.jpg' size='medium' />
+								<Image src={item.data_url} size='medium' />
 							</Reveal.Content>
 							<Reveal.Content hidden>
 								<Image src='https://cdn.dsmcdn.com/mnresize/415/622/ty76/product/media/images/20210225/14/66899714/142499060/5/5_org_zoom.jpg' size='medium' />
@@ -48,14 +50,14 @@ const DummyBody = (props) => {
 							Beden:
 						</p>
 						<div>
-							<Button primary>36</Button>
-							<Button>38</Button>
-							<Button>40</Button>
+			{
+				props.state.filter(el => el.productHeader === item.productHeader).sort((arg1, arg2) => arg1.size-arg2.size).map(ea => ea.stock > 0 && <Button key={ea.productURL} onClick={()=>setDummyState(ea)}>{ea.size}</Button>)
+			}
 						</div>
 						</Grid.Row>
 						<Grid.Row textAlign='center'>
 						<div  style={{marginTop: '10px'}}>
-						<Button as='a' icon={{name: 'shopping basket'}} content='Sepete Ekle'size='large'/>
+						<Button icon={{name: 'shopping basket'}} content='Sepete Ekle'size='large'/>
 						<p style={{marginTop: '15px'}}>Tahmini teslimat süresi: 2 gün</p>
 						</div>
 						</Grid.Row>

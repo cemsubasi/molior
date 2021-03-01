@@ -9,6 +9,9 @@ import AlbumPageContainer from "./albumpage/AlbumPageContainer";
 import AboutPageContainer from "./aboutpage/AboutPageContainer";
 import PostsPageContainer from "./postspage/PostsPageContainer";
 import ElbiseContainer from './products/ElbiseContainer';
+import AltGiyimContainer from './products/AltGiyimContainer';
+import UstGiyimContainer from './products/UstGiyimContainer';
+import IndirimliContainer from './products/IndirimliContainer';
 import Page404 from '../common/404';
 import { url3 } from "../Data";
 
@@ -22,6 +25,9 @@ const RouteComponent = (props) => {
           <Route path="/album" children={<AlbumPageContainer />} />
           <Route path="/about" children={<AboutPageContainer />} />
           <Route path="/elbise" children={<ElbiseContainer />} />
+          <Route path="/alt-giyim" children={<AltGiyimContainer />} />
+          <Route path="/ust-giyim" children={<UstGiyimContainer />} />
+          <Route path="/indirimli-urunler" children={<IndirimliContainer />} />
           <Route
             path={url3}
             render={() =>

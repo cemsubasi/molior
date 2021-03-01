@@ -1,18 +1,16 @@
 import React from 'react'
-import Elbise from './Elbise'
+import Indimli from './Indimli'
 import HeaderComponent from "../../common/HeaderComponent";
 import NewFooter from "../../common/NewFooter";
 
-function ElbiseContainer() {
+function IndirimliContainer() {
 	return(
-		<React.Fragment>
 		<HeaderComponent>
-      <Elbise />
-		</HeaderComponent>
+      <Indimli />
       <NewFooter />
-		</React.Fragment>
+		</HeaderComponent>
 
 	)
 }
 
-export default ElbiseContainer
+export default IndirimliContainer

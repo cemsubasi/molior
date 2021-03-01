@@ -9,28 +9,27 @@ import {
   setErr,
 } from "./SuperAction";
 import SuperModal from "./SuperModal";
-import { CKEditor } from "@ckeditor/ckeditor5-react";
-import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import ImageUploading from 'react-images-uploading';
 import { dateParsed } from "../../Data";
 import { useEffect } from "react";
+import { Select, Label, Input, Form, TextArea, Button, Radio } from 'semantic-ui-react'
 
 const SuperForm = (props) => {
   // eslint-disable-next-line
-  const [text, setText] = useState("");
   const [edit, setEdit] = useState({});
-  const [modalShow, setModalShow] = useState(false);
   const [inputState, setInputState] = useState({
     id: Date.now(),
-		thumbnail: 'Negro',
-		postUrl: 'slug/' + Date.now(),
-    postHeader: "",
-    postBody: "",
-    author: "İdil Subaşı",
+		productURL: 'slug/' + Date.now(),
+    productHeader: "",
+    productBody: "",
+    price: 0,
+		size: '',
+		stock: 0,
     category: "",
+    collect: "",
+		discount: 0,
+    shipping: false,
     date: dateParsed,
-    featured: false,
-    comments: [],
     data_url: "",
     file: {},
     title: "",
@@ -42,44 +41,30 @@ const SuperForm = (props) => {
     // console.log(imageList, addUpdateIndex);
     setImages(imageList);
   };
-	const textHandler = () => setText('');
 
-  useEffect(
-    () => setInputState({ ...inputState, postBody: text }),
-    // eslint-disable-next-line
-    [text]
-  );
   useEffect(
     () => setEdit(props.state.filter((e) => e.postUrl === props.editState)),
     // eslint-disable-next-line
     [props.editState]
   );
-  useEffect(
-    () => {
-      if (edit[0]) {
-        setInputState({ ...inputState, ...edit[0] });
-        setText(edit[0].postBody);
-      }
-    },
-    // eslint-disable-next-line
-    [edit]
-  );
   useEffect(() => console.log(props), [props]);
 
-  const inputStateHandler = (e) =>
-    setInputState({ ...inputState, [e.target.name]: e.target.value });
+  const inputStateHandler = (event, data) =>
+    setInputState({ ...inputState, [event.target.name]: event.target.value, [data.name]: data.value });
   const inputStateClear = () =>
     setInputState({
-      id: Date.now(),
-			thumbnail: 'Negro',
-			postUrl: 'slug/' + Date.now(),
-      postHeader: "",
-      postBody: "",
-      author: "İdil Subaşı",
-      category: "",
-      date: dateParsed,
-      featured: false,
-      comments: [],
+			id: Date.now(),
+			productURL: 'slug/' + Date.now(),
+			productHeader: "",
+			productBody: "",
+			price: 0,
+			size: '',
+			stock: 0,
+			category: "",
+			collect: "",
+			discount: 0,
+			shipping: false,
+			date: dateParsed,
 			data_url: "",
 			file: {},
 			title: "",
@@ -90,10 +75,7 @@ const SuperForm = (props) => {
       setInputState({
 				...inputState,
         ...images[0],
-        title: inputState.title,
-        category: inputState.category,
       });
-      console.log(inputState);
     },
     // eslint-disable-next-line
     [images]
@@ -103,29 +85,17 @@ const SuperForm = (props) => {
 			...inputState,
 			data_url: "",
 			file: {},
-			date: "",
-			title: "",
-			category: "Ben",
-		
 		});
 
 
   const Submit = () => {
     //if there is one other with same url then edit that object
-    if (props.state.some((user) => user.postUrl === inputState.postUrl)) {
-      // setText("");
-      // inputStateClear();
-      // props.setErr(0);
-      setModalShow(true);
-      // return props.replacePost(inputState);
+    if (props.state.some((user) => user.productURL === inputState.productURL)) {
+      inputStateClear();
+      props.setErr(0);
+      return props.replacePost(inputState);
     }
-    //url doesnt be empty or take blank
-    //i should implement real url algorithm
-    else if (inputState.postUrl === "" || inputState.postUrl.includes(" ")) {
-      props.setErr(1);
-      //success
-    } else {
-      setText("");
+    else {
       inputStateClear();
 			props.editPost('');
       props.setErr(0);
@@ -134,9 +104,30 @@ const SuperForm = (props) => {
     }
   };
 
+	const categoryOptions = [
+		{key: 'category1', value: 'elbise', text: 'Elbise',},
+		{key: 'category2', value: 'alt-giyim', text: 'Alt Giyim',},
+		{key: 'category3', value: 'ust-giyim', text: 'Üst Giyim',},
+	]
+	const sizeOptions = [
+		{key: 'size1', value: 34, text: '34',},
+		{key: 'size2', value: 36, text: '36',},
+		{key: 'size3', value: 38, text: '38',},
+		{key: 'size4', value: 40, text: '40',},
+		{key: 'size5', value: 42, text: '42',},
+	]
+	const collectOptions = [
+		{key: 'collect1', value: 'summer', text: 'Yaz',},
+		{key: 'collect2', value: 'winter', text: 'Kış',},
+	]
+	const shippingOptions = [
+		{key: 'shipping1', value: 'true', text: 'Ücretsiz',},
+		{key: 'shipping2', value: 'false', text: 'Ücretli',},
+	]
+
+	console.log('inputState', inputState)
   return (
     <div className="container">
-      <SuperModal texthandler={textHandler} editpost={props.editPost} seterr={props.setErr} replacepost={props.replacePost} show={modalShow} inputstateclear={inputStateClear} inputstate={inputState} onHide={() => setModalShow(false)} />
       {(() => {
         switch (props.errState) {
           case 0:
@@ -163,82 +154,107 @@ const SuperForm = (props) => {
         }
       })()}
 
-      <div className="row m-2auto">
-        <div className="col-6 p-2">
-          <label className="form-label">Başlık</label>
-          <input
-            type="text"
-            className="form-control"
-            name="postHeader"
-            value={inputState.postHeader}
-            onChange={inputStateHandler}
-            id="exampleFormControlInput1"
-            placeholder="Post Header"
-          />
-        </div>
-      </div>
-      <div className="row m-2auto">
-        <div className="col-6 p-2">
-          <label className="form-label">İndirim</label>
-          <input
-            type="text"
-            className="form-control"
-            name="author"
-            value={inputState.author}
-            onChange={inputStateHandler}
-            id="exampleFormControlInput1"
-            placeholder="Author"
-          />
-        </div>
-        <div className="col-6 p-2">
-          <label className="form-label">Fiyat</label>
-          <input
-            type="text"
-            className="form-control"
-            name="author"
-            value={inputState.author}
-            onChange={inputStateHandler}
-            id="exampleFormControlInput1"
-            placeholder="Author"
-          />
-        </div>
-        <div className="col-6 p-2">
-          <label className="form-label">Kategori</label>
-          <input
-            type="text"
-            className="form-control"
-            name="category"
-            value={inputState.category}
-            onChange={inputStateHandler}
-            id="exampleFormControlInput1"
-            placeholder="Category"
-          />
-        </div>
-      </div>
-        <div className="col-6 p-2">
-				<label className="form-label">Beden</label>
-				<select
-					className="form-select m-auto"
-					name="thumbnail"
-					value={inputState.thumbnail}
-					onChange={(e) => inputStateHandler(e)}
-					aria-label="Default select example">
-					<option value="Negro">Negro</option>
-					<option value="Punch">Punch</option>
-				</select>
-				</div>
-        <div className="col-6 p-2">
-				<label className="form-label">Koleksiyon</label>
-				<select
-					className="form-select m-auto"
-					name="thumbnail"
-					value={inputState.thumbnail}
-					onChange={(e) => inputStateHandler(e)}
-					aria-label="Default select example">
-					<option value="Negro">Negro</option>
-					<option value="Punch">Punch</option>
-				</select>
-				</div>
+		  <Form>
+		    <Form.Group widths='equal'>
+		      <Form.Field
+		        id='form-input-control-first-name'
+		        control={Input}
+						onChange={inputStateHandler}
+						value={inputState.productHeader}
+						name='productHeader'
+		        label='Başlık'
+		        placeholder='Ürün Başlığı'
+		      />
+		      <Form.Field
+		        id='form-input-control-last-name'
+		        control={Input}
+						onChange={inputStateHandler}
+						value={inputState.productBody}
+						name='productBody'
+		        label='Yan Başlık'
+		        placeholder='Ürün Yan Başlığı'
+		      />
+		    <Form.Group>
+		      <Form.Field
+		        id='form-input-control-last-name'
+		        control={Input}
+						onChange={inputStateHandler}
+						value={inputState.price}
+						name='price'
+		        label='Fiyat'
+		        placeholder='TL'
+		      />
+		      <Form.Field
+		        id='form-input-control-last-name'
+		        control={Input}
+						onChange={inputStateHandler}
+						value={inputState.discount}
+						name='discount'
+						icon='percent'
+		        label='İndirim'
+		        placeholder='İndirim Yüzdesi'
+		      />
+		      <Form.Field
+		        control={Select}
+						onChange={(event, data) => inputStateHandler(event, data)}
+		        options={shippingOptions}
+						value={inputState.shipping}
+						name='shipping'
+		        label={{ children: 'Kargo', htmlFor: 'form-select-control-gender'  }}
+		        placeholder='Kargo'
+		        searchInput={{ id: 'form-select-control-gender'  }}
+		      />
+		    </Form.Group>
+		    </Form.Group>
+		    <Form.Group widths='equal'>
+		      <Form.Field
+		        control={Select}
+						onChange={(event, data) => inputStateHandler(event, data)}
+						value={inputState.size}
+						name='size'
+		        options={sizeOptions}
+		        label={{ children: 'Beden', htmlFor: 'form-select-control-gender'  }}
+		        placeholder='Beden'
+		        searchInput={{ id: 'form-select-control-gender'  }}
+		      />
+		      <Form.Field
+		        id='form-input-control-last-name'
+		        control={Input}
+						onChange={inputStateHandler}
+						value={inputState.stock}
+						name='stock'
+		        label='Stok'
+		        placeholder='Stok miktari'
+		      />
+		      <Form.Field
+		        control={Select}
+		        options={categoryOptions}
+						onChange={(event, data) => inputStateHandler(event, data)}
+						value={inputState.category}
+						name='category'
+		        label={{ children: 'Kategori', htmlFor: 'form-select-control-gender'  }}
+		        placeholder='Kategori'
+		        searchInput={{ id: 'form-select-control-gender'  }}
+		      />
+		      <Form.Field
+		        control={Select}
+		        options={collectOptions}
+						onChange={(event, data) => inputStateHandler(event, data)}
+						value={inputState.collect}
+						name='collect'
+		        label={{ children: 'Koleksiyon', htmlFor: 'form-select-control-gender'  }}
+		        placeholder='Koleksiyon'
+		        searchInput={{ id: 'form-select-control-gender'  }}
+		      />
+		    </Form.Group>
+		    <Form.Field
+		      id='form-button-control-public'
+		      control={Button}
+		      content='Confirm'
+		      label='Label with htmlFor'
+		    />
+		  </Form>
+
       <ImageUploading
         multiple
         value={images}
@@ -261,52 +277,11 @@ const SuperForm = (props) => {
 
                   <div className="card-body">
                     <p className="card-text">{inputState.title}</p>
-                    <div>
-                      <small className="text-muted">{inputState.date}</small>
-                    </div>
                   </div>
                 </div>
               </div>
             ))}
             &nbsp;
-            <div className="row" style={{ maxWidth: "650px", margin: "auto" }}>
-              <div className="col-9 py-3">
-                <input
-                  type="text"
-                  className="form-control m-auto"
-                  name="title"
-                  value={inputState.title}
-                  onChange={inputStateHandler}
-                  id="exampleFormControlInput1"
-                  placeholder="Description"
-                />
-              </div>
-              <div className="col-3 py-3">
-                <select
-                  className="form-select m-auto"
-                  name="category"
-                  value={inputState.category}
-                  onChange={inputStateHandler}
-                  aria-label="Default select example">
-                  <option value="Ben">Ben</option>
-                  <option value="Onlar">Onlar</option>
-                </select>
-              </div>
-
-              <div
-                className="input-group mb-3"
-                style={{ maxWidth: "650px", margin: "auto" }}>
-                <button
-                  className="btn btn-outline-secondary"
-                  onClick={() => {
-                    props.addPhoto(inputState);
-                    setClearInputs();
-                    onImageRemove();
-                  }}
-                  type="button"
-                  id="inputGroupFileAddon03">
-                  Save
-                </button>
 
                 <input
                   {...dragProps}
@@ -328,33 +303,16 @@ const SuperForm = (props) => {
                   id="inputGroupFileAddon04">
                   Clear
                 </button>
-              </div>
-            </div>
           </div>
         )}
       </ImageUploading>
 
-      <div className="editor mb-3 m-2auto">
-        <CKEditor
-          editor={ClassicEditor}
-          name="postBody"
-          value={text}
-          data={text}
-          onChange={(event, editor) => {
-            const data = editor.getData();
-            setText(data);
-          }}
-          id="exampleFormControlTextarea1"
-          rows="5"
-        />
-      </div>
       <div className="my-3">
         <button className="btn btn-outline-dark mb-3" onClick={Submit}>
           Add Post
         </button>
 		<button className="btn btn-outline-danger mb-3 mx-2" onClick={()=> {
 			inputStateClear();
-			setText('');
 			props.editPost('');
 		}}>
           Clear

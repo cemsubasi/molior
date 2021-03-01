@@ -1,18 +1,16 @@
 import React from 'react'
-import Elbise from './Elbise'
+import AltGiyim from './AltGiyim'
 import HeaderComponent from "../../common/HeaderComponent";
 import NewFooter from "../../common/NewFooter";
 
-function ElbiseContainer() {
+function AltGiyimContainer() {
 	return(
-		<React.Fragment>
 		<HeaderComponent>
-      <Elbise />
-		</HeaderComponent>
+      <AltGiyim />
       <NewFooter />
-		</React.Fragment>
+		</HeaderComponent>
 
 	)
 }
 
-export default ElbiseContainer
+export default AltGiyimContainer

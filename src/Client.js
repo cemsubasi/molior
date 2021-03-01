@@ -13,7 +13,6 @@ const Client = (props) => {
   useEffect(
     () => {
       props.fetchPosts();
-      props.fetchPhotos();
     },
     // eslint-disable-next-line
     []

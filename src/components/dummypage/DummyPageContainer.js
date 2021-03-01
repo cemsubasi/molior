@@ -6,10 +6,12 @@ import DummyBody from "./DummyBody";
 
 const DummyPageContainer = (props) => {
   return (
+		<React.Fragment>
 		<HeaderComponent>
       <DummyBody />
-      <NewFooter />
 		</HeaderComponent>
+      <NewFooter />
+		</React.Fragment>
   );
 };
 
