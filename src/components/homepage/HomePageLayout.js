@@ -46,7 +46,7 @@ const BannerText = ({ mobile }) => (
 				color: '#FFF' ,
       }}
     />
-    <Button color='white' size='huge' style={{margin: '20px 0px'}}>
+    <Button inverted size='huge' style={{margin: '20px 0px'}}>
      Alışverişe Başla 
       <Icon name='right arrow' />
     </Button>
@@ -115,7 +115,7 @@ const DesktopContainer = ({Child}) => {
   }
 
 DesktopContainer.propTypes = {
-  Child: PropTypes.element,
+  Child: PropTypes.node,
 }
 
 const MobileContainer = ({Child}) => {
@@ -176,7 +176,7 @@ const MobileContainer = ({Child}) => {
 }
 
 MobileContainer.propTypes = {
-  Child: PropTypes.element,
+  Child: PropTypes.node,
 }
 
 const ResponsiveContainer = ({ Child }) => (
@@ -191,11 +191,11 @@ const ResponsiveContainer = ({ Child }) => (
 )
 
 ResponsiveContainer.propTypes = {
-  Child: PropTypes.element,
+  Child: PropTypes.node,
 }
 
-const HomepageLayout = ({ Child }) => (
-  <ResponsiveContainer Child={Child}>
+const HomepageLayout = ( Child ) => (
+  <ResponsiveContainer {...Child}>
   </ResponsiveContainer>
 )
 

@@ -12,6 +12,7 @@ import ElbiseContainer from './products/ElbiseContainer';
 import AltGiyimContainer from './products/AltGiyimContainer';
 import UstGiyimContainer from './products/UstGiyimContainer';
 import IndirimliContainer from './products/IndirimliContainer';
+import CartContainer from './shoppingcart/CartContainer';
 import Page404 from '../common/404';
 import { url3 } from "../Data";
 
@@ -28,6 +29,7 @@ const RouteComponent = (props) => {
           <Route path="/alt-giyim" children={<AltGiyimContainer />} />
           <Route path="/ust-giyim" children={<UstGiyimContainer />} />
           <Route path="/indirimli-urunler" children={<IndirimliContainer />} />
+          <Route path="/sepet" children={<CartContainer />} />
           <Route
             path={url3}
             render={() =>

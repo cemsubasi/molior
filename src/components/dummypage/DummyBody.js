@@ -1,27 +1,15 @@
 import React, {useState} from "react";
 import { useParams } from "react-router-dom";
 import { connect } from "react-redux";
-import {Reveal, Image, Grid, Header, Button, } from 'semantic-ui-react'
-
-			// import parse from "html-react-parser";
-      // <div key={item.postUrl} className="container">
-      //   <div className="container pt-4 m-auto p-5">
-      //     <h2 className="text-center pb-4" 
-						// tabIndex='0'
-					// >{item.postHeader}</h2>
-      //     <div>{parse(item.postBody)}</div>
-      //     <p
-      //       className="border-bottom pb-5"
-      //       style={{ textAlign: "right", color: "#9FA4A7" }}>
-      //       {item.date}
-      //     </p>
-      //   </div>
-      // </div>
+import {Message, Reveal, Image, Grid, Header, Button, } from 'semantic-ui-react'
+import {add2cart} from './DummyAction'
 
 const DummyBody = (props) => {
   let { slug } = useParams();
 	const [dummyState, setDummyState] = useState({})
-	console.log(dummyState)
+	const [message, setMessage] = useState(false)
+
+	
   return props.state
     .filter((item) => item.productURL === 'slug/' + slug)
     .map((item) => (
@@ -57,7 +45,27 @@ const DummyBody = (props) => {
 						</Grid.Row>
 						<Grid.Row textAlign='center'>
 						<div  style={{marginTop: '10px'}}>
-						<Button icon={{name: 'shopping basket'}} content='Sepete Ekle'size='large'/>
+			{
+				message &&   
+						<Message
+						warning
+						header='Uyarı'
+						content='Sepete eklemeden önce beden seçmelisiniz.'
+					/>
+			}
+						<Button icon={{name: 'shopping basket'}} onClick={()=>{
+								if(dummyState.id){
+									props.add2cart(dummyState)
+									console.log('cart', props.cart)
+									console.log(dummyState)
+									setDummyState({})
+								} 
+								else{
+									setMessage(true)
+									setTimeout(()=>setMessage(false), 5000)
+								}
+							}} 
+							content='Sepete Ekle'size='large'/>
 						<p style={{marginTop: '15px'}}>Tahmini teslimat süresi: 2 gün</p>
 						</div>
 						</Grid.Row>
@@ -70,7 +78,8 @@ const DummyBody = (props) => {
 const mapStateToProps = (state) => {
   return {
     state: state.postState,
+		cart: state.cart,
   };
 };
 
-export default connect(mapStateToProps)(DummyBody);
+export default connect(mapStateToProps, {add2cart})(DummyBody);

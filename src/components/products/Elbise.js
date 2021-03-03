@@ -1,13 +1,16 @@
 import React, {useState, useEffect,} from 'react'
 import {Link} from 'react-router-dom'
 import { Header, Card, Image, Icon, Container, Grid,  } from 'semantic-ui-react'
-import { axiosCall, url } from '../../Data'
+import {connect} from 'react-redux'
 
-function CardComponent() {
+function CardComponent(props) {
 	const [state, setState] = useState([])
-	useEffect(()=> axiosCall('get', url)
-		.then(res => setState(res.filter((item, index, self) => index === self.findIndex(e => e.productHeader === item.productHeader) && item.category === 'elbise'))	
-		), [])
+	useEffect(()=>{
+		if(props.state)
+			setState(props.state.filter((item, index, self) => index === self.findIndex(e => e.productHeader === item.productHeader) && item.category === 'elbise'))	
+
+	}
+	,[props.state])
 
 	return(
 			state.map && state.map(item => 
@@ -58,7 +61,7 @@ function CardComponent() {
 	)
 }
 
-function Elbise() {
+function Elbise(props) {
 	let count = 10;
 	return(
 		<React.Fragment>
@@ -67,11 +70,16 @@ function Elbise() {
 			</Header>
 			<Container style={{marginBottom: '50px ', }}>
 				<Grid>
-					<CardComponent />
+					<CardComponent {...props} />
 				</Grid>
 			</Container>
 		</React.Fragment>
 	)
 }
+const mapStateToProps = (state) => {
+	return{
+		state: state.postState,
+	}
+}
 
-export default Elbise
+export default connect(mapStateToProps, )(Elbise) 
