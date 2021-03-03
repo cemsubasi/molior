@@ -8,11 +8,10 @@ import {
 	editPost,
   setErr,
 } from "./SuperAction";
-import SuperModal from "./SuperModal";
 import ImageUploading from 'react-images-uploading';
 import { dateParsed } from "../../Data";
 import { useEffect } from "react";
-import { Select, Label, Input, Form, TextArea, Button, Radio } from 'semantic-ui-react'
+import { Select, Input, Form, Button, } from 'semantic-ui-react'
 
 const SuperForm = (props) => {
   // eslint-disable-next-line
@@ -65,8 +64,8 @@ const SuperForm = (props) => {
 			discount: 0,
 			shipping: false,
 			date: dateParsed,
-			data_url: "",
-			file: {},
+			// data_url: "",
+			// file: {},
 			title: "",
     });
 
@@ -97,6 +96,7 @@ const SuperForm = (props) => {
     }
     else {
       inputStateClear();
+			setClearInputs();
 			props.editPost('');
       props.setErr(0);
 

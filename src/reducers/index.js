@@ -6,6 +6,8 @@ export const reducer = (state = Data, action) => {
       return { ...state, postState: [...state.postState, ...action.payload] };
     case "FETCH_PHOTOS":
       return { ...state, photoState: [...state.photoState, ...action.payload] };
+    case "FETCH_PRODUCTS":
+      return { ...state, productState: [...state.productState, ...action.payload] };
     case "ADD_POST":
       return {
         ...state,
@@ -63,6 +65,14 @@ export const reducer = (state = Data, action) => {
             : { ...item }
         ),
       };
+		case "ADD2CART":
+			return {
+				...state, cart:[...state.cart, action.payload]
+			};
+		case "ADD2STORAGE":
+			return {
+				...state, cart:[...state.cart, ...action.payload]
+			};
     default:
       return state;
   }

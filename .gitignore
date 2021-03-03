@@ -1,4 +1,7 @@
 node_modules
+<<<<<<< HEAD
 src/Data
+=======
+>>>>>>> dev
 src/ssl/
 src/trash/

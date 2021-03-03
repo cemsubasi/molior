@@ -2,7 +2,6 @@ import React from 'react';
 import {Link} from 'react-router-dom'
 import {
   Button,
-  Container,
 	Icon,
   Divider,
   Grid,
@@ -118,10 +117,10 @@ const HomeBody = () => {
 							Yüzlerce modelin arasından sizin için seçtik. 
             </p>
           <Grid.Column textAlign='center'>
-            <Button as={Link} to='/alt-giyim' size='huge'>Hemen İncele</Button>
+            <Button as={Link} to='/alt-giyim' style={{textAlign: 'center'}} size='huge'>Hemen İncele</Button>
           </Grid.Column>
           </Grid.Column>
-          <Grid.Column floated='right' width={6}>
+          <Grid.Column width={6}>
             <Image rounded as={Link} to='/alt-giyim' size='large' src={logo}/>
           </Grid.Column>
         </Grid.Row>
