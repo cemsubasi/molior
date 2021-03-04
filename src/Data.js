@@ -13,7 +13,7 @@ export const homePageTitle = 'Munch Punch ve Negrodan Sevgilerle ';
 export const secret = 'munchhh';
 
 const instance = axios.create({
-		baseURL: 'http://127.0.0.1:4004',
+		baseURL: 'https://molior-server.herokuapp.com
 		timeout: 50000,
 	headers: {
 				'Access-Control-Allow-Origin': '*',
