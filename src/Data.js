@@ -13,48 +13,24 @@ export const homePageTitle = 'Munch Punch ve Negrodan Sevgilerle ';
 export const secret = 'munchhh';
 
 const instance = axios.create({
-<<<<<<< HEAD
-	baseURL: 'http://127.0.0.1:4004',
-	timeout: 50000,
-	headers: {
-		'Access-Control-Allow-Origin': '*',
-		'Access-Control-Allow-Methods':'GET,PUT,POST,DELETE,PATCH,OPTIONS',
-		},
-=======
 		baseURL: 'http://127.0.0.1:4004',
 		timeout: 50000,
 	headers: {
 				'Access-Control-Allow-Origin': '*',
 				'Access-Control-Allow-Methods':'GET,PUT,POST,DELETE,PATCH,OPTIONS',
 	},
->>>>>>> dev
 });
 axios.default.withCredentials = true;
 
 export const axiosCall = (method, URL, postArg) => {
 	return new Promise((resolve, reject) => {
-<<<<<<< HEAD
-	 instance[method](URL, postArg)
-	 .then(res => resolve(res.data))
-	 .catch(err => reject(err))
-=======
 			 instance[method](URL, postArg)
 			 .then(res => resolve(res.data))
 			 .catch(err => reject(err))
->>>>>>> dev
 	})
 }
 
 export const Data = {
-<<<<<<< HEAD
-  postState: [],
-	photoState: [],
-	editState: '',
-  errState: -1,
-  isAdmin: true,
-  errMessage: "",
-	superInputState: 'post',
-=======
 	  postState: [],
 		photoState: [],
 		productState: [],
@@ -65,5 +41,4 @@ export const Data = {
 	  errMessage: "",
 		superInputState: 'post',
 	
->>>>>>> dev
 };
