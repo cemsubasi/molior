@@ -46,7 +46,7 @@ const BannerText = ({ mobile }) => (
 				color: '#FFF' ,
       }}
     />
-    <Button inverted size='huge' style={{margin: '20px 0px'}}>
+    <Button as={Link} to='/elbise' inverted size='huge' style={{margin: '20px 0px'}}>
      Alışverişe Başla 
       <Icon name='right arrow' />
     </Button>
@@ -96,7 +96,7 @@ const DesktopContainer = ({Child}) => {
                 </Menu.Item>
                 <Menu.Item as={Link} to='/elbise'>Elbise</Menu.Item>
                 <Menu.Item as={Link} to='/ust-giyim'>Üst Giyim</Menu.Item>
-                <Menu.Item as={Link} to='/posts'>Alt Giyim</Menu.Item>
+                <Menu.Item as={Link} to='/alt-giyim'>Alt Giyim</Menu.Item>
 								<Menu.Item as={Link} to='/indirimli-urunler'>İndirimli Ürünler</Menu.Item>
                 <Menu.Item position='right'>
                   <Button as={Link} to='/' icon='search' style={{ marginLeft: '0.5em', paddingLeft: '18px', paddingRight: '18px' }}>
@@ -143,7 +143,7 @@ const MobileContainer = ({Child}) => {
             </Menu.Item>
             <Menu.Item as={Link} to='/elbise'>Elbise</Menu.Item>
             <Menu.Item as={Link} to='/ust-giyim'>Üst Giyim</Menu.Item>
-            <Menu.Item as={Link} to='/posts'>Alt Giyim</Menu.Item>
+            <Menu.Item as={Link} to='/alt-giyim'>Alt Giyim</Menu.Item>
           </Sidebar>
 
           <Sidebar.Pusher dimmed={sidebarOpened}>

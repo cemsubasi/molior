@@ -5,7 +5,7 @@ dateParsed = dateParsed.split(" ").slice(1, 4).join(" ");
 
 export const url = "/api"
 export const url2 = "/others"
-export const url3 = "/punchvenegro"
+export const url3 = "/neva"
 export const url4 = "/others/edit";
 
 export const bannerHead = '#iyiolacagiz';
@@ -13,7 +13,8 @@ export const homePageTitle = 'Munch Punch ve Negrodan Sevgilerle ';
 export const secret = 'munchhh';
 
 const instance = axios.create({
-		baseURL: 'https://molior-server.herokuapp.com
+		// baseURL: 'https://molior-server.herokuapp.com',
+		baseURL: 'http://127.0.0.1:4004',
 		timeout: 50000,
 	headers: {
 				'Access-Control-Allow-Origin': '*',

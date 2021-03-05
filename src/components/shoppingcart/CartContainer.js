@@ -8,8 +8,8 @@ function CartContainer() {
 		<React.Fragment>
 			<HeaderComponent>
 				<Cart />
-				<NewFooter />
 			</HeaderComponent>
+				<NewFooter />
 		</React.Fragment>
 	)
 }

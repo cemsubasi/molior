@@ -38,7 +38,7 @@ const HomeBody = () => {
         </Grid.Row>
         <Grid.Row>
           <Grid.Column textAlign='center'>
-            <Button size='huge'>Hemen İncele</Button>
+            <Button as={Link} to='/elbise' size='huge'>Hemen İncele</Button>
           </Grid.Column>
         </Grid.Row>
       </Grid>

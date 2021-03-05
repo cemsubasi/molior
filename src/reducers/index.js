@@ -73,6 +73,14 @@ export const reducer = (state = Data, action) => {
 			return {
 				...state, cart:[...state.cart, ...action.payload]
 			};
+		case "DELETE_FROM_CART":
+			return {
+				...state, cart: state.cart.filter((item, index, self) => index !== self.findIndex(e => e.id === action.payload.id))
+			}
+		case "BAN_FROM_CART":
+			return {
+				...state, cart: state.cart.filter(item => item.id !== action.payload.id)
+			}
     default:
       return state;
   }

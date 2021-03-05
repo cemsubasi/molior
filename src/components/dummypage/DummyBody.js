@@ -1,15 +1,30 @@
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 import { useParams } from "react-router-dom";
 import { connect } from "react-redux";
-import {Message, Reveal, Image, Grid, Header, Button, } from 'semantic-ui-react'
+import {Icon, Message, Reveal, Image, Grid, Header, Button, } from 'semantic-ui-react'
 import {add2cart} from './DummyAction'
 
-const DummyBody = (props) => {
+	// style={{backgroundColor: ''}}
+const MyButton = ({ea, setDummyState, dummyState, }) => {
+	useEffect(()=>{
+		setDummyState(ea)	
+	}
+	, [ea, setDummyState])
+
+	return(
+		<Button 
+			key={ea.productURL} 
+			primary={ea.size === dummyState.size}
+			onClick={()=>setDummyState(ea)}
+			>{ea.size}</Button>
+	)
+}
+	const DummyBody = (props) => {
   let { slug } = useParams();
 	const [dummyState, setDummyState] = useState({})
 	const [message, setMessage] = useState(false)
 
-	
+	console.log('dummyState', dummyState)
   return props.state
     .filter((item) => item.productURL === 'slug/' + slug)
     .map((item) => (
@@ -31,7 +46,39 @@ const DummyBody = (props) => {
 						<p style={{fontSize: '1.33em',}}>
 							Siyah Fisto Detaylı Vual Plaj Elbise
 						</p>
-						<Header as='h2'>110TL</Header>
+				{
+					item.discount > 0 && item.price > 149 ?
+					<React.Fragment>
+		      <div style={{fontSize: '1.33em'}}>
+		        <Icon name='percent' color='red' />
+					{item.discount} indirim 
+						<Icon style={{marginLeft: '15px'}} name='shipping fast' color='red'/>
+						Bedava
+					</div>
+					</React.Fragment>
+					:
+					item.discount > 0 ?
+		      <div style={{fontSize: '1.33em'}}>
+		        <Icon name='percent' color='red' />
+					{item.discount} indirim 
+		      </div>
+					: item.shipping === true || item.price > 149 ?
+					<div style={{fontSize: '1.33em', color: 'red' }}>
+						<Icon name='shipping fast' color='red'/>
+						Bedava
+					</div>
+					: null
+				}
+						<Header style={{fontSize: '1.33em'}}>
+					Fiyat:{' '}
+								{item.discount ? 
+									<React.Fragment>
+									<span style={{textDecoration: 'line-through', marginRight: '10px'}}>{item.price + ' TL'}</span> 
+									<span>{item.price - (item.price * item.discount/100).toFixed(2) + ' TL'}</span>
+									</React.Fragment>
+									: <span>{item.price + ' TL'}</span>
+								}
+							</Header>
 						<Grid container stackable  style={{marginTop: '5px'}}>
 						<Grid.Row>
 						<p floated='left' style={{fontSize: '1.33em', }}>
@@ -39,7 +86,7 @@ const DummyBody = (props) => {
 						</p>
 						<div>
 			{
-				props.state.filter(el => el.productHeader === item.productHeader).sort((arg1, arg2) => arg1.size-arg2.size).map(ea => ea.stock > 0 && <Button key={ea.productURL} onClick={()=>setDummyState(ea)}>{ea.size}</Button>)
+				props.state.filter(el => el.productHeader === item.productHeader).sort((arg1, arg2) => arg1.size-arg2.size).map(ea => ea.stock > 0 && <MyButton key={ea.id} ea={ea} setDummyState={setDummyState} dummyState={dummyState} />)
 			}
 						</div>
 						</Grid.Row>
@@ -53,19 +100,17 @@ const DummyBody = (props) => {
 						content='Sepete eklemeden önce beden seçmelisiniz.'
 					/>
 			}
-						<Button icon={{name: 'shopping basket'}} onClick={()=>{
+						<Button icon={{name: dummyState && !(dummyState.stock > 0 || dummyState.length > 0) ? 'box' : 'shopping basket'}} onClick={()=>{
 								if(dummyState.id){
 									props.add2cart(dummyState)
 									console.log('cart', props.cart)
-									console.log(dummyState)
-									setDummyState({})
 								} 
 								else{
 									setMessage(true)
 									setTimeout(()=>setMessage(false), 5000)
 								}
 							}} 
-							content='Sepete Ekle'size='large'/>
+							content={dummyState && !(dummyState.stock > 0 || dummyState.length > 0) ? 'Tükendi' : 'Sepete Ekle'} disabled={dummyState && !(dummyState.stock > 0 || dummyState.length > 0) }size='large'/>
 						<p style={{marginTop: '15px'}}>Tahmini teslimat süresi: 2 gün</p>
 						</div>
 						</Grid.Row>
