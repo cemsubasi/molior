@@ -1,4 +1,4 @@
-import { axiosCall, url2, url4 } from "../../Data";
+import { axiosCall, url2, url4, url5 } from "../../Data";
 
 export const addPost = (arg) => (dispatch) => {
   axiosCall("post", url2, arg)
@@ -6,22 +6,32 @@ export const addPost = (arg) => (dispatch) => {
     .catch((err) => dispatch({ type: "ERR_MESSAGE", payload: err }));
 };
 export const deletePost = (arg) => (dispatch) => {
-  axiosCall("delete", url2, { data: { postUrl: arg } })
+  axiosCall("delete", url2, { data: { productURL: arg } })
     .then(() => dispatch({ type: "DELETE_POST", payload: arg }))
     .catch((err) => dispatch({ type: "ERR_MESSAGE", payload: err }));
 };
 export const featuredPost = (arg) => (dispatch) => {
-  axiosCall("put", url2, { postUrl: arg.postUrl, featured: !arg.featured })
-    .then(() => dispatch({ type: "FEATURED_POST", payload: arg.postUrl }))
+  axiosCall("put", url2, { productURL: arg.productURL, publish: !arg.publish })
+    .then(() => dispatch({ type: "FEATURED_POST", payload: arg.productURL }))
+    .catch((err) => dispatch({ type: "ERR_MESSAGE", payload: err }));
+};
+export const handleStock = (arg) => (dispatch) => {
+  axiosCall("put", url5, {productURL: arg.productURL, count: arg.count})
+    .then(() => dispatch({ type: "HANDLE_STOCK", payload: arg}))
     .catch((err) => dispatch({ type: "ERR_MESSAGE", payload: err }));
 };
 export const replacePost = (arg) => (dispatch) => {
   axiosCall("put", url4, {
-    postUrl: arg.postUrl,
-    postBody: arg.postBody,
-    postHeader: arg.postHeader,
-    author: arg.author,
-    category: arg.category,
+    productURL: arg.productURL,
+    productHeader: arg.productHeader,
+    productBody: arg.productBody,
+		discount: arg.discount,
+		shipping: arg.shipping,
+		size: arg.size,
+		price: arg.price,
+		category: arg.category,
+		collect: arg.collect,
+		stock: arg.stock,
   })
     .then(() => dispatch({ type: "REPLACE_POST", payload: arg }))
     .catch((err) => dispatch({ type: "ERR_MESSAGE", payload: err }));

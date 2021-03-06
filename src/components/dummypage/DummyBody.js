@@ -47,22 +47,22 @@ const MyButton = ({ea, setDummyState, dummyState, }) => {
 							Siyah Fisto Detaylı Vual Plaj Elbise
 						</p>
 				{
-					item.discount > 0 && item.price > 149 ?
+					dummyState.discount > 0 && dummyState.price > 149 ?
 					<React.Fragment>
 		      <div style={{fontSize: '1.33em'}}>
 		        <Icon name='percent' color='red' />
-					{item.discount} indirim 
+					{dummyState.discount} indirim 
 						<Icon style={{marginLeft: '15px'}} name='shipping fast' color='red'/>
 						Bedava
 					</div>
 					</React.Fragment>
 					:
-					item.discount > 0 ?
+					dummyState.discount > 0 ?
 		      <div style={{fontSize: '1.33em'}}>
 		        <Icon name='percent' color='red' />
 					{item.discount} indirim 
 		      </div>
-					: item.shipping === true || item.price > 149 ?
+					: dummyState.shipping === true || item.price > 149 ?
 					<div style={{fontSize: '1.33em', color: 'red' }}>
 						<Icon name='shipping fast' color='red'/>
 						Bedava
@@ -71,7 +71,7 @@ const MyButton = ({ea, setDummyState, dummyState, }) => {
 				}
 						<Header style={{fontSize: '1.33em'}}>
 					Fiyat:{' '}
-								{item.discount ? 
+								{dummyState.discount ? 
 									<React.Fragment>
 									<span style={{textDecoration: 'line-through', marginRight: '10px'}}>{item.price + ' TL'}</span> 
 									<span>{item.price - (item.price * item.discount/100).toFixed(2) + ' TL'}</span>

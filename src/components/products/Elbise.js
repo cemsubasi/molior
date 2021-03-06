@@ -7,7 +7,7 @@ function CardComponent(props) {
 	const [state, setState] = useState([])
 	useEffect(()=>{
 		if(props.state)
-			setState(props.state.filter((item, index, self) => index === self.findIndex(e => e.productHeader === item.productHeader) && item.category === 'elbise'))	
+			setState(props.state.filter((item, index, self) => (index === self.findIndex(e => e.productHeader === item.productHeader) && item.category === 'elbise') && item.publish))	
 
 	}
 	,[props.state])

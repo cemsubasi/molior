@@ -17,23 +17,32 @@ export const reducer = (state = Data, action) => {
       return {
         ...state,
         postState: state.postState.filter(
-          (item) => item.postUrl !== action.payload
+          (item) => item.productURL !== action.payload
         ),
       };
     case "FEATURED_POST":
       return {
         ...state,
         postState: state.postState.map((item) =>
-          item.postUrl === action.payload
-            ? { ...item, featured: !item.featured }
-            : { ...item }
+          item.productURL === action.payload
+            ? { ...item, publish: !item.publish }
+            : item
+        ),
+      };
+    case "HANDLE_STOCK":
+      return {
+        ...state,
+        postState: state.postState.map((item) =>
+          item.productURL === action.payload.productURL
+            ? { ...item, stock: item.stock + action.payload.count }
+            : item
         ),
       };
     case "REPLACE_POST":
       return {
         ...state,
         postState: state.postState.map((item) =>
-          item.postUrl === action.payload.postUrl
+          item.productURL === action.payload.productURL
             ? { ...item, ...action.payload }
             : { ...item }
         ),

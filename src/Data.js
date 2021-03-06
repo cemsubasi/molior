@@ -7,6 +7,7 @@ export const url = "/api"
 export const url2 = "/others"
 export const url3 = "/neva"
 export const url4 = "/others/edit";
+export const url5 = "/others/stock";
 
 export const bannerHead = '#iyiolacagiz';
 export const homePageTitle = 'Munch Punch ve Negrodan Sevgilerle ';
@@ -36,7 +37,7 @@ export const Data = {
 		photoState: [],
 		productState: [],
 		cart: [],
-		editState: '',
+		editState: {},
 	  errState: -1,
 	  isAdmin: true,
 	  errMessage: "",

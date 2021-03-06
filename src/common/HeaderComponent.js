@@ -10,6 +10,7 @@ import {
   Segment,
   Sidebar,
   Visibility,
+	Label,
 } from 'semantic-ui-react'
 
 const { MediaContextProvider, Media } = createMedia({
@@ -48,7 +49,7 @@ const DesktopContainer = ({children}) => {
               secondary={!fixed}
               size='large'
             >
-              <Container >
+              <Container>
                 <Menu.Item as={Link} to='/' active>
                   Ana Sayfa
                 </Menu.Item>
@@ -59,7 +60,11 @@ const DesktopContainer = ({children}) => {
                 <Menu.Item position='right'>
                   <Button as={Link} to='/' icon='search' style={{ marginLeft: '0.5em', paddingLeft: '18px', paddingRight: '18px' }}>
                   </Button>
-                  <Button as={Link} to='/sepet' icon='shopping basket'  primary style={{ marginLeft: '0.5em', paddingLeft: '20px', paddingRight: '20px' }}>
+                  <Button as={Link} to='/sepet' primary style={{ marginLeft: '0.5em', paddingLeft: '20px', paddingRight: '20px' }}>
+									<Icon style={{margin: '0px'}} name='shopping cart' />
+									<Label size='small' circular color='red' style={{top: '-4px'}}floating>
+										2
+									</Label>
                   </Button>
                 </Menu.Item>
               </Container>
@@ -118,8 +123,12 @@ const MobileContainer = ({children}) => {
                   <Menu.Item position='right'>
                     <Button as={Link} to='/' icon='search' inverted  style={{ marginLeft: '0.5em', paddingLeft: '18px', paddingRight: '18px' }}>
                     </Button>
-                    <Button as={Link} to='/sepet' icon='shopping basket' inverted style={{ marginLeft: '0.5em', paddingLeft: '20px', paddingRight: '20px' }}>
-                    </Button>
+                  <Button as={Link} to='/sepet' inverted style={{ marginLeft: '0.5em', paddingLeft: '20px', paddingRight: '20px' }}>
+									<Icon style={{margin: '0px'}} name='shopping cart' />
+									<Label size='small' circular color='red' style={{top: '-4px'}}floating>
+										2
+									</Label>
+                  </Button>
                   </Menu.Item>
                 </Menu>
               </Container>

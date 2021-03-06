@@ -11,28 +11,28 @@ import {
 import ImageUploading from 'react-images-uploading';
 import { dateParsed } from "../../Data";
 import { useEffect } from "react";
-import { Select, Input, Form, Button, } from 'semantic-ui-react'
+import { Container, Select, Input, Form, Button, } from 'semantic-ui-react'
 
 const SuperForm = (props) => {
-  // eslint-disable-next-line
-  const [edit, setEdit] = useState({});
-  const [inputState, setInputState] = useState({
-    id: Date.now(),
-		productURL: 'slug/' + Date.now(),
-    productHeader: "",
-    productBody: "",
-    price: 0,
-		size: '',
-		stock: 0,
-    category: "",
-    collect: "",
-		discount: 0,
-    shipping: false,
-    date: dateParsed,
-    data_url: "",
-    file: {},
-    title: "",
-  });
+	const INITIAL = {
+			id: Date.now(),
+			productURL: 'slug/' + Date.now(),
+			productHeader: "",
+			productBody: "",
+			price: 0,
+			size: '',
+			stock: 0,
+			category: "",
+			collect: "",
+			discount: 0,
+			shipping: false,
+			date: dateParsed,
+			data_url: "",
+			file: {},
+			title: "",
+			publish: false,
+    }
+  const [inputState, setInputState] = useState(INITIAL);
   const [images, setImages] = useState([]);
   const maxNumber = 1;
   const onChange = (imageList, addUpdateIndex) => {
@@ -41,12 +41,10 @@ const SuperForm = (props) => {
     setImages(imageList);
   };
 
-  useEffect(
-    () => setEdit(props.state.filter((e) => e.postUrl === props.editState)),
-    // eslint-disable-next-line
-    [props.editState]
+	useEffect(() => 
+		setInputState(props.editState)
+  ,[props.editState, setInputState]
   );
-  useEffect(() => console.log(props), [props]);
 
   const inputStateHandler = (event, data) =>
     setInputState({ ...inputState, [event.target.name]: event.target.value, [data.name]: data.value });
@@ -67,6 +65,7 @@ const SuperForm = (props) => {
 			// data_url: "",
 			// file: {},
 			title: "",
+			publish: false,
     });
 
   useEffect(
@@ -97,7 +96,7 @@ const SuperForm = (props) => {
     else {
       inputStateClear();
 			setClearInputs();
-			props.editPost('');
+			props.editPost(INITIAL);
       props.setErr(0);
 
       return props.addPost(inputState);
@@ -110,24 +109,23 @@ const SuperForm = (props) => {
 		{key: 'category3', value: 'ust-giyim', text: 'Üst Giyim',},
 	]
 	const sizeOptions = [
-		{key: 'size1', value: 34, text: '34',},
-		{key: 'size2', value: 36, text: '36',},
-		{key: 'size3', value: 38, text: '38',},
-		{key: 'size4', value: 40, text: '40',},
-		{key: 'size5', value: 42, text: '42',},
+		{key: 'size1', value: '34', text: '34',},
+		{key: 'size2', value: '36', text: '36',},
+		{key: 'size3', value: '38', text: '38',},
+		{key: 'size4', value: '40', text: '40',},
+		{key: 'size5', value: '42', text: '42',},
 	]
 	const collectOptions = [
 		{key: 'collect1', value: 'summer', text: 'Yaz',},
 		{key: 'collect2', value: 'winter', text: 'Kış',},
 	]
 	const shippingOptions = [
-		{key: 'shipping1', value: 'true', text: 'Ücretsiz',},
-		{key: 'shipping2', value: 'false', text: 'Ücretli',},
+		{key: 'shipping1', value: true, text: 'Ücretsiz',},
+		{key: 'shipping2', value: false, text: 'Ücretli',},
 	]
 
-	console.log('inputState', inputState)
   return (
-    <div className="container">
+    <Container>
       {(() => {
         switch (props.errState) {
           case 0:
@@ -181,6 +179,7 @@ const SuperForm = (props) => {
 						onChange={inputStateHandler}
 						value={inputState.price}
 						name='price'
+						icon='try'
 		        label='Fiyat'
 		        placeholder='TL'
 		      />
@@ -247,14 +246,7 @@ const SuperForm = (props) => {
 		        searchInput={{ id: 'form-select-control-gender'  }}
 		      />
 		    </Form.Group>
-		    <Form.Field
-		      id='form-button-control-public'
-		      control={Button}
-		      content='Confirm'
-		      label='Label with htmlFor'
-		    />
-		  </Form>
-
+		    <Form.Group >
       <ImageUploading
         multiple
         value={images}
@@ -263,9 +255,10 @@ const SuperForm = (props) => {
         dataURLKey="data_url">
         {({ imageList, onImageUpload, onImageRemove, dragProps }) => (
           // write your building UI
-          <div className="upload__image-wrapper">
+          <div className="upload__image-wrapper m-auto" >
+				
             {imageList.map((image, index) => (
-              <div key={index} className="image-item">
+              <div key={index} className="image-item m-auto">
                 <div className="card col-4 shadow-sm m-auto">
                   <img
                     src={image.data_url}
@@ -283,7 +276,7 @@ const SuperForm = (props) => {
             ))}
             &nbsp;
 
-                <input
+                <Input
                   {...dragProps}
                   onClick={() => {
                     onImageRemove();
@@ -294,31 +287,43 @@ const SuperForm = (props) => {
                   id="inputGroupFile03"
                   aria-describedby="inputGroupFileAddon03"
                   aria-label="Upload"
+									style={{maxWidth: '400px'}}
                 />
-
-                <button
-                  className="btn btn-outline-secondary"
-                  onClick={onImageRemove}
-                  type="button"
-                  id="inputGroupFileAddon04">
-                  Clear
-                </button>
+		    <Form.Group style={{margin: '1em 0em'}}>
+		    <Form.Field
+		      id='form-button-control-public'
+		      control={Button}
+		      content='Gönder'
+		      label='Gönder'
+					primary
+					onClick={Submit}
+		    />
+		    <Form.Field
+		      id='form-button-control-public'
+		      control={Button}
+					color='red'
+		      content='Temizle'
+		      label='Temizle'
+					onClick={()=>{
+						props.editPost(INITIAL);
+					}}
+		    />
+		    <Form.Field
+		      id='form-button-control-public'
+		      control={Button}
+					color='red'
+		      label='Foto Temizle'
+					content='Foto Temizle'
+					onClick={onImageRemove}
+		    />
+		    </Form.Group>
           </div>
         )}
       </ImageUploading>
+		    </Form.Group>
+		  </Form>
 
-      <div className="my-3">
-        <button className="btn btn-outline-dark mb-3" onClick={Submit}>
-          Add Post
-        </button>
-		<button className="btn btn-outline-danger mb-3 mx-2" onClick={()=> {
-			inputStateClear();
-			props.editPost('');
-		}}>
-          Clear
-        </button>
-      </div>
-    </div>
+		</Container>
   );
 };
 

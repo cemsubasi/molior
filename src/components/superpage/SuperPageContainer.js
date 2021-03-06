@@ -1,7 +1,5 @@
-import SuperBanner from "./SuperBanner";
 import SuperList from "./SuperList";
 import SuperForm from "./SuperForm";
-import SuperPhoto from "./SuperPhoto";
 import HeaderComponent from "../../common/HeaderComponent";
 import NewFooter from "../../common/NewFooter";
 import { connect } from "react-redux";
@@ -9,18 +7,9 @@ import { connect } from "react-redux";
 function SuperPageContainer(props) {
   return (
 		<HeaderComponent>
-      <div className="superuser">
-        <SuperBanner />
-        {props.superInputState === "post" ? (
-          <div>
-            <SuperList />
-            <SuperForm />
-          </div>
-        ) : (
-          <SuperPhoto />
-        )}
-        <NewFooter />
-      </div>
+			<SuperList />
+			<SuperForm />
+			<NewFooter />
 		</HeaderComponent>
   );
 }
