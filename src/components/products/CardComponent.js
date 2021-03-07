@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { Header, Card, Image, Icon, Container, Grid } from "semantic-ui-react";
-import { connect } from "react-redux";
+import { Card, Image, Icon, Grid } from "semantic-ui-react";
 import PlaceHolder from "./PlaceHolder";
 
 function CardComponent(props) {
@@ -13,12 +12,15 @@ function CardComponent(props) {
 					(item, index, self) =>
 						index ===
 							self.findIndex((e) => e.productHeader === item.productHeader) &&
-						item.discount > 0
+						item.category === "elbise" &&
+						item.publish
 				)
 			);
 	}, [props.state]);
 
-	return state.map ? (
+	return state.map &&
+		state.filter((item) => item.category === props.category && item.publish)
+			.length > 0 ? (
 		state.map((item) => (
 			<Grid.Column key={item.productURL} mobile={16} tablet={8} computer={4}>
 				<Card as={Link} to={item.productURL} style={{ margin: "auto" }}>
@@ -99,25 +101,4 @@ function CardComponent(props) {
 		<PlaceHolder />
 	);
 }
-
-function Indirim(props) {
-	return (
-		<React.Fragment>
-			<Header style={{ marginBottom: "25px", textAlign: "center" }}>
-				İndirim kategorisi için bulunan sonuçlar
-			</Header>
-			<Container style={{ marginBottom: "50px " }}>
-				<Grid>
-					<CardComponent {...props} />
-				</Grid>
-			</Container>
-		</React.Fragment>
-	);
-}
-const mapStateToProps = (state) => {
-	return {
-		state: state.postState,
-	};
-};
-
-export default connect(mapStateToProps)(Indirim);
+export default CardComponent;

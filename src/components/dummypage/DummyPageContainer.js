@@ -5,20 +5,18 @@ import NewFooter from "../../common/NewFooter";
 import DummyBody from "./DummyBody";
 
 const DummyPageContainer = (props) => {
-  return (
-		<React.Fragment>
+	return (
 		<HeaderComponent>
-      <DummyBody />
+			<DummyBody />
+			<NewFooter />
 		</HeaderComponent>
-      <NewFooter />
-		</React.Fragment>
-  );
+	);
 };
 
 const mapStateToProps = (state) => {
-  return {
-    state: state.postState,
-  };
+	return {
+		state: state.postState,
+	};
 };
 
 export default connect(mapStateToProps)(DummyPageContainer);

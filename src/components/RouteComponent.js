@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { connect } from "react-redux";
 import SuperPageContainer from "./superpage/SuperPageContainer";
@@ -8,49 +8,51 @@ import LoginPageContainer from "./loginpage/LoginPageContainer";
 import AlbumPageContainer from "./albumpage/AlbumPageContainer";
 import AboutPageContainer from "./aboutpage/AboutPageContainer";
 import PostsPageContainer from "./postspage/PostsPageContainer";
-import ElbiseContainer from './products/ElbiseContainer';
-import AltGiyimContainer from './products/AltGiyimContainer';
-import UstGiyimContainer from './products/UstGiyimContainer';
-import IndirimliContainer from './products/IndirimliContainer';
-import CartContainer from './shoppingcart/CartContainer';
-import Page404 from '../common/404';
+import ElbiseContainer from "./products/ElbiseContainer";
+import AltGiyimContainer from "./products/AltGiyimContainer";
+import UstGiyimContainer from "./products/UstGiyimContainer";
+import IndirimliContainer from "./products/IndirimliContainer";
+import CartContainer from "./shoppingcart/CartContainer";
+import SuperTest from "./superpage/SuperTest";
+import Page404 from "../common/404";
 import { url3 } from "../Data";
 
 const RouteComponent = (props) => {
-  return (
-    <Router>
+	return (
+		<Router>
 			<React.Fragment>
-        <Switch>
-          <Route exact path="/" children={<HomePageContainer />} />
-          <Route path="/posts" children={<PostsPageContainer />} />
-          <Route path="/album" children={<AlbumPageContainer />} />
-          <Route path="/about" children={<AboutPageContainer />} />
-          <Route path="/elbise" children={<ElbiseContainer />} />
-          <Route path="/alt-giyim" children={<AltGiyimContainer />} />
-          <Route path="/ust-giyim" children={<UstGiyimContainer />} />
-          <Route path="/indirimli-urunler" children={<IndirimliContainer />} />
-          <Route path="/sepet" children={<CartContainer />} />
-          <Route
-            path={url3}
-            render={() =>
-              props.isAdmin === true ? (
-                <SuperPageContainer />
-              ) : (
-                <LoginPageContainer />
-              )
-            }
-          />
-          <Route path="/slug/:slug" children={<DummyPageContainer />} />
-          <Route path="*" children={<Page404 />} />
-        </Switch>
+				<Switch>
+					<Route exact path="/" children={<HomePageContainer />} />
+					<Route path="/posts" children={<PostsPageContainer />} />
+					<Route path="/album" children={<AlbumPageContainer />} />
+					<Route path="/about" children={<AboutPageContainer />} />
+					<Route path="/elbise" children={<ElbiseContainer />} />
+					<Route path="/alt-giyim" children={<AltGiyimContainer />} />
+					<Route path="/ust-giyim" children={<UstGiyimContainer />} />
+					<Route path="/indirimli-urunler" children={<IndirimliContainer />} />
+					<Route path="/sepet" children={<CartContainer />} />
+					<Route path="/supertest" children={<SuperTest />} />
+					<Route
+						path={url3}
+						render={() =>
+							props.isAdmin === true ? (
+								<SuperPageContainer />
+							) : (
+								<LoginPageContainer />
+							)
+						}
+					/>
+					<Route path="/slug/:slug" children={<DummyPageContainer />} />
+					<Route path="*" children={<Page404 />} />
+				</Switch>
 			</React.Fragment>
-    </Router>
-  );
+		</Router>
+	);
 };
 const mapStateToProps = (state) => {
-  return {
-    isAdmin: state.isAdmin,
-  };
+	return {
+		isAdmin: state.isAdmin,
+	};
 };
 
 export default connect(mapStateToProps)(RouteComponent);

@@ -4,6 +4,7 @@ import React, { useState } from 'react'
 import {Link} from 'react-router-dom'
 import {
   Button,
+	Label,
   Container,
   Header,
   Icon,
@@ -12,6 +13,7 @@ import {
   Sidebar,
   Visibility,
 } from 'semantic-ui-react'
+import {connect} from 'react-redux'
 
 const { MediaContextProvider, Media } = createMedia({
   breakpoints: {
@@ -61,7 +63,7 @@ BannerText.propTypes = {
  * Neither Semantic UI nor Semantic UI React offer a responsive navbar, however, it can be implemented easily.
  * It can be more complicated, but you can create really flexible markup.
  */
-const DesktopContainer = ({Child}) => {
+const DesktopContainer = ({children, props}) => {
 	const [state, setState] = useState({})
 
   const hideFixedMenu = () => setState({ fixed: false })
@@ -101,7 +103,15 @@ const DesktopContainer = ({Child}) => {
                 <Menu.Item position='right'>
                   <Button as={Link} to='/' icon='search' style={{ marginLeft: '0.5em', paddingLeft: '18px', paddingRight: '18px' }}>
                   </Button>
-                  <Button as={Link} to='/sepet' icon='shopping basket' primary style={{ marginLeft: '0.5em', paddingLeft: '20px', paddingRight: '20px' }}>
+                  <Button as={Link} to='/sepet' primary style={{ marginLeft: '0.5em', paddingLeft: '20px', paddingRight: '20px' }}>
+									<Icon style={{margin: '0px'}} name='shopping cart' />
+								{
+									props.state && props.state.length > 0 ?
+									<Label size='small' circular color='red' style={{top: '-4px'}}floating>
+									{(props.state && props.state.length < 1) ? 0 : props.state.length }	
+									</Label>
+									: null
+								}	
                   </Button>
                 </Menu.Item>
               </Container>
@@ -109,23 +119,28 @@ const DesktopContainer = ({Child}) => {
 					<BannerText />
 				</Segment>
         </Visibility>
-				<Child />
+				{children}
       </Media>
     )
   }
 
 DesktopContainer.propTypes = {
-  Child: PropTypes.node,
+  children: PropTypes.node,
+	props: PropTypes.oneOfType([
+		PropTypes.object,
+		PropTypes.array,
+		PropTypes.arrayOf(PropTypes.object),
+	])
 }
 
-const MobileContainer = ({Child}) => {
+const MobileContainer = ({children, props}) => {
 	const [state, setState] = useState({})
 
   const handleSidebarHide = () => setState({ sidebarOpened: false })
 
   const handleToggle = () => setState({ sidebarOpened: true })
 
-    const { sidebarOpened } = state
+	const { sidebarOpened } = state
 
     return (
       <Media as={Sidebar.Pushable} at='mobile'>
@@ -162,13 +177,21 @@ const MobileContainer = ({Child}) => {
                   <Menu.Item position='right'>
                     <Button as={Link} to='/' icon='search' style={{ marginLeft: '0.5em', paddingLeft: '18px', paddingRight: '18px' }}>
                     </Button>
-                    <Button as={Link} to='/sepet' primary icon='shopping basket' style={{ marginLeft: '0.5em', paddingLeft: '20px', paddingRight: '20px' }}>
-                    </Button>
+                  <Button as={Link} to='/sepet' primary style={{ marginLeft: '0.5em', paddingLeft: '20px', paddingRight: '20px' }}>
+									<Icon style={{margin: '0px'}} name='shopping cart' />
+								{
+									props.state && props.state.length > 0 ?
+									<Label size='small' circular color='red' style={{top: '-4px'}}floating>
+									{(props.state && props.state.length < 1) ? 0 : props.state.length }	
+									</Label>
+									: null
+								}	
+                  </Button>
                   </Menu.Item>
                 </Menu>
               </Container>
             </Segment>
-						<Child />
+						{children}
           </Sidebar.Pusher>
         </Sidebar.Pushable>
       </Media>
@@ -176,27 +199,44 @@ const MobileContainer = ({Child}) => {
 }
 
 MobileContainer.propTypes = {
-  Child: PropTypes.node,
+  children: PropTypes.node,
+	props: PropTypes.oneOfType([
+		PropTypes.object,
+		PropTypes.array,
+		PropTypes.arrayOf(PropTypes.object),
+	])
 }
 
-const ResponsiveContainer = ({ Child }) => (
+const ResponsiveContainer = ({ children, props }) => (
   /* Heads up!
    * For large applications it may not be best option to put all page into these containers at
    * they will be rendered twice for SSR.
    */
   <MediaContextProvider>
-    <DesktopContainer Child={Child} ></DesktopContainer>
-    <MobileContainer Child={Child} ></MobileContainer>
+    <DesktopContainer props={props}>{children}</DesktopContainer>
+    <MobileContainer props={props}>{children}</MobileContainer>
   </MediaContextProvider>
 )
 
 ResponsiveContainer.propTypes = {
-  Child: PropTypes.node,
+  children: PropTypes.node,
+	props: PropTypes.oneOfType([
+		PropTypes.object,
+		PropTypes.array,
+		PropTypes.arrayOf(PropTypes.object),
+	])
 }
 
-const HomepageLayout = ( Child ) => (
-  <ResponsiveContainer {...Child}>
+const HomepageLayout = ( props ) => (
+  <ResponsiveContainer props={props}> 
+		{props.children}
   </ResponsiveContainer>
 )
 
-export default HomepageLayout
+const mapStateToProps = (state) => {
+	return {
+		state: state.cart,
+	}
+}
+
+export default connect(mapStateToProps)(HomepageLayout)

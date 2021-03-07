@@ -1,18 +1,15 @@
-import React from 'react'
-import Elbise from './Elbise'
+import React from "react";
+import Elbise from "./Elbise";
 import HeaderComponent from "../../common/HeaderComponent";
 import NewFooter from "../../common/NewFooter";
 
 function ElbiseContainer() {
-	return(
-		<React.Fragment>
+	return (
 		<HeaderComponent>
-      <Elbise />
+			<Elbise />
+			<NewFooter />
 		</HeaderComponent>
-      <NewFooter />
-		</React.Fragment>
-
-	)
+	);
 }
 
-export default ElbiseContainer
+export default ElbiseContainer;

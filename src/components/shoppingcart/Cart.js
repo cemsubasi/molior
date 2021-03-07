@@ -33,7 +33,6 @@ function Cart(props) {
 		return axiosCall('post', '/offer', arg).then(res => console.log('answer', res))
 	}
 
-	console.log('state', state)
 	return(
 		<Container style={{margin: '3em 0 8em 0'}}>
 		{

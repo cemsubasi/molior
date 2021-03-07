@@ -5,12 +5,10 @@ import NewFooter from '../../common/NewFooter'
 
 function CartContainer() {
 	return(
-		<React.Fragment>
 			<HeaderComponent>
 				<Cart />
-			</HeaderComponent>
 				<NewFooter />
-		</React.Fragment>
+			</HeaderComponent>
 	)
 }
 

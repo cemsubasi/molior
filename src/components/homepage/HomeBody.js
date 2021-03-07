@@ -120,8 +120,8 @@ const HomeBody = () => {
             <Button as={Link} to='/alt-giyim' style={{textAlign: 'center'}} size='huge'>Hemen İncele</Button>
           </Grid.Column>
           </Grid.Column>
-          <Grid.Column width={6}>
-            <Image rounded as={Link} to='/alt-giyim' size='large' src={logo}/>
+          <Grid.Column width={6} floated='right' textAlign='center'>
+            <Image bordered rounded style={{margin: 'auto', textAlign: 'center', width: 'auto'}}as={Link} to='/alt-giyim' size='large' src={logo}/>
           </Grid.Column>
         </Grid.Row>
       </Grid>

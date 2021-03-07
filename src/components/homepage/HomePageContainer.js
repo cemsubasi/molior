@@ -3,17 +3,12 @@ import HomeBody from './HomeBody';
 import HomePageLayout from './HomePageLayout';
 import NewFooter from "../../common/NewFooter";
 
-function Container(){
-	return (
-		<React.Fragment>
-			<HomeBody />
-			<NewFooter />
-		</React.Fragment>
-	)
-}
 function HomePageContainer() {
   return (
-		<HomePageLayout Child={Container}  />
+		<HomePageLayout>
+			<HomeBody />
+			<NewFooter />
+		</HomePageLayout>
   );
 }
 
