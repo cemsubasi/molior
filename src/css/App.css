@@ -1,21 +1,22 @@
 .App {
-  text-align: center;
+	text-align: center;
 }
 a {
-  text-decoration: none;
+	text-decoration: none;
 }
 
-	  /* background-image: url('https://fashionista.com/.image/t_share/MTM5NDU0OTMzODExMzQwNDUy/kl1_0420jpg.jpg') !important; */
-.homeContainer {           
-	  background-image: url('../images/homecover.jpg') !important;
-		  background-size: cover !important;
+.homeContainer {
+	background-image: url("../images/homecover.jpg") !important;
+	/* background-repeat: no-repeat !important; */
+	/* background-position: top !important; */
+	background-size: cover !important;
 }
 
-.homeMenu {                
-	  background-color: #FFF !important;
+.homeMenu {
+	background-color: #fff !important;
 }
 
-.mobilebanner {           
-	  background-image: url('../images/molior7.png') !important;
-		background-size: cover !important;
+.mobilebanner {
+	background-image: url("../images/molior7.png") !important;
+	background-size: cover !important;
 }

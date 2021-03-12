@@ -1,15 +1,15 @@
 import React from "react";
-import Elbise from "./Elbise";
+import Discounts from "./Discounts";
 import HeaderComponent from "../../common/HeaderComponent";
 import NewFooter from "../../common/NewFooter";
 
-function ElbiseContainer() {
+function DiscountsContainer() {
 	return (
 		<HeaderComponent>
-			<Elbise />
+			<Discounts />
 			<NewFooter />
 		</HeaderComponent>
 	);
 }
 
-export default ElbiseContainer;
+export default DiscountsContainer;

@@ -53,9 +53,6 @@ const DesktopContainer = ({ children }) => {
 						<Menu.Item as={Link} to="/neva">
 							Neva
 						</Menu.Item>
-						<Menu.Item as={Link} to="/supertest">
-							Nasıl Görünüyor?
-						</Menu.Item>
 						<Menu.Item as={Link} to="/orders">
 							Siparişler
 						</Menu.Item>
@@ -96,9 +93,6 @@ const MobileContainer = ({ children }) => {
 					</Menu.Item>
 					<Menu.Item as={Link} to="/neva">
 						Neva
-					</Menu.Item>
-					<Menu.Item as={Link} to="/test">
-						Nasıl Görünüyor?
 					</Menu.Item>
 					<Menu.Item as={Link} to="/orders">
 						Siparişler

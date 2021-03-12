@@ -5,13 +5,11 @@ import SuperPageContainer from "./superpage/SuperPageContainer";
 import HomePageContainer from "./homepage/HomePageContainer";
 import DummyPageContainer from "./dummypage/DummyPageContainer";
 import LoginPageContainer from "./loginpage/LoginPageContainer";
-import AlbumPageContainer from "./albumpage/AlbumPageContainer";
 import AboutPageContainer from "./aboutpage/AboutPageContainer";
-import PostsPageContainer from "./postspage/PostsPageContainer";
-import ElbiseContainer from "./products/ElbiseContainer";
-import AltGiyimContainer from "./products/AltGiyimContainer";
-import UstGiyimContainer from "./products/UstGiyimContainer";
-import IndirimliContainer from "./products/IndirimliContainer";
+import DressesContainer from "./products/DressesContainer";
+import BottomsContainer from "./products/BottomsContainer";
+import TopsContainer from "./products/TopsContainer";
+import DiscountsContainer from "./products/DiscountsContainer";
 import CartContainer from "./shoppingcart/CartContainer";
 import SuperTest from "./superpage/SuperTest";
 import Page404 from "../common/404";
@@ -22,16 +20,14 @@ const RouteComponent = (props) => {
 		<Router>
 			<React.Fragment>
 				<Switch>
-					<Route exact path="/" children={<HomePageContainer />} />
-					<Route path="/posts" children={<PostsPageContainer />} />
-					<Route path="/album" children={<AlbumPageContainer />} />
-					<Route path="/about" children={<AboutPageContainer />} />
-					<Route path="/elbise" children={<ElbiseContainer />} />
-					<Route path="/alt-giyim" children={<AltGiyimContainer />} />
-					<Route path="/ust-giyim" children={<UstGiyimContainer />} />
-					<Route path="/indirimli-urunler" children={<IndirimliContainer />} />
-					<Route path="/sepet" children={<CartContainer />} />
-					<Route path="/supertest" children={<SuperTest />} />
+					<Route exact path="/" component={HomePageContainer} />
+					<Route path="/about" component={AboutPageContainer} />
+					<Route exact path="/elbise" component={DressesContainer} />
+					<Route path="/alt-giyim" component={BottomsContainer} />
+					<Route path="/ust-giyim" component={TopsContainer} />
+					<Route path="/indirimli-urunler" component={DiscountsContainer} />
+					<Route path="/sepet" component={CartContainer} />
+					<Route path="/supertest" component={SuperTest} />
 					<Route
 						path={url3}
 						render={() =>
@@ -42,8 +38,8 @@ const RouteComponent = (props) => {
 							)
 						}
 					/>
-					<Route path="/slug/:slug" children={<DummyPageContainer />} />
-					<Route path="*" children={<Page404 />} />
+					<Route path="/:slug" component={DummyPageContainer} />
+					<Route path="*" component={Page404} />
 				</Switch>
 			</React.Fragment>
 		</Router>

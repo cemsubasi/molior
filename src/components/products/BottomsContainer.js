@@ -1,14 +1,15 @@
 import React from "react";
+import Bottoms from "./Bottoms";
 import HeaderComponent from "../../common/HeaderComponent";
 import NewFooter from "../../common/NewFooter";
-import PostsBody from "./PostsBody";
 
-function PostsPageContainer() {
-  return (
+function BottomsContainer() {
+	return (
 		<HeaderComponent>
-      <PostsBody />
-      <NewFooter />
+			<Bottoms />
+			<NewFooter />
 		</HeaderComponent>
-  );
+	);
 }
-export default PostsPageContainer;
+
+export default BottomsContainer;

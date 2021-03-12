@@ -1,17 +1,17 @@
 import React from "react";
 import { Header, Container, Grid } from "semantic-ui-react";
 import { connect } from "react-redux";
-import CardComponent from "./CardComponent";
+import CardComponent from "../../common/CardComponent";
 
-function Elbise(props) {
+function Bottoms(props) {
 	return (
 		<React.Fragment>
-			<Header as="h3" style={{ marginBottom: "35px", textAlign: "center" }}>
-				Elbise kategorisi için bulunan sonuçlar
+			<Header style={{ marginBottom: "35px", textAlign: "center" }}>
+				Alt giyim kategorisi için bulunan sonuçlar
 			</Header>
 			<Container style={{ marginBottom: "50px " }}>
 				<Grid>
-					<CardComponent {...props} category="elbise" />
+					<CardComponent {...props} category="alt-giyim" />
 				</Grid>
 			</Container>
 		</React.Fragment>
@@ -20,8 +20,7 @@ function Elbise(props) {
 const mapStateToProps = (state) => {
 	return {
 		state: state.postState,
-		cart: state.cart,
 	};
 };
 
-export default connect(mapStateToProps)(Elbise);
+export default connect(mapStateToProps)(Bottoms);

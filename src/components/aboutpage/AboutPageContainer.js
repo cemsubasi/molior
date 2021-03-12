@@ -1,16 +1,14 @@
 import React from "react";
 import AboutBody from "./AboutBody";
-import HeaderComponent from '../../common/HeaderComponent';
-import NewFooter from '../../common/NewFooter';
+import HeaderComponent from "../../common/HeaderComponent";
+import NewFooter from "../../common/NewFooter";
 
 function AboutPageContainer() {
-  return (
-    <React.Fragment>
-			<HeaderComponent>
+	return (
+		<HeaderComponent>
 			<AboutBody />
 			<NewFooter />
-			</HeaderComponent>
-    </React.Fragment>
-  );
+		</HeaderComponent>
+	);
 }
 export default AboutPageContainer;

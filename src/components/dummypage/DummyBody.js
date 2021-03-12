@@ -1,40 +1,17 @@
-import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import React, { useState } from "react";
+import { useLocation } from "react-router-dom";
 import { connect } from "react-redux";
-import {
-	Icon,
-	Message,
-	Reveal,
-	Image,
-	Grid,
-	Header,
-	Button,
-} from "semantic-ui-react";
+import { Reveal, Image, Grid } from "semantic-ui-react";
 import { add2cart } from "./DummyAction";
+import DummyItemProperties from "./DummyItemProperties";
 
-// style={{backgroundColor: ''}}
-const MyButton = ({ ea, setDummyState, dummyState }) => {
-	useEffect(() => {
-		setDummyState(ea);
-	}, [ea, setDummyState]);
-
-	return (
-		<Button
-			key={ea.productURL}
-			primary={ea.size === dummyState.size}
-			onClick={() => setDummyState(ea)}
-		>
-			{ea.size}
-		</Button>
-	);
-};
 const DummyBody = (props) => {
-	let { slug } = useParams();
+	let { pathname } = useLocation();
 	const [dummyState, setDummyState] = useState({});
 	const [message, setMessage] = useState(false);
 
 	return props.state
-		.filter((item) => item.productURL === "slug/" + slug)
+		.filter((item) => "/" + item.productURL === pathname)
 		.map((item) => (
 			<Grid
 				key={item.productURL}
@@ -61,123 +38,14 @@ const DummyBody = (props) => {
 					width={6}
 					style={{ marginLeft: "0px", borderLeft: "1px solid rgba(0,0,0,0.1)" }}
 				>
-					<Header as="h3" style={{ fontSize: "2em" }}>
-						Molior Spring Collection #21 Black Queen
-					</Header>
-					<p style={{ fontSize: "1.33em" }}>
-						Siyah Fisto Detaylı Vual Plaj Elbise
-					</p>
-					{dummyState.discount > 0 && dummyState.price > 149 ? (
-						<React.Fragment>
-							<div style={{ fontSize: "1.33em" }}>
-								<Icon name="percent" color="red" />
-								{dummyState.discount} indirim
-								<Icon
-									style={{ marginLeft: "15px" }}
-									name="shipping fast"
-									color="red"
-								/>
-								Bedava
-							</div>
-						</React.Fragment>
-					) : dummyState.discount > 0 ? (
-						<div style={{ fontSize: "1.33em" }}>
-							<Icon name="percent" color="red" />
-							{item.discount} indirim
-						</div>
-					) : dummyState.shipping === true || item.price > 149 ? (
-						<div style={{ fontSize: "1.33em", color: "red" }}>
-							<Icon name="shipping fast" color="red" />
-							Bedava
-						</div>
-					) : null}
-					<Header style={{ fontSize: "1.33em" }}>
-						Fiyat:{" "}
-						{dummyState.discount ? (
-							<React.Fragment>
-								<span
-									style={{
-										textDecoration: "line-through",
-										marginRight: "10px",
-									}}
-								>
-									{item.price + " TL"}
-								</span>
-								<span>
-									{item.price -
-										((item.price * item.discount) / 100).toFixed(2) +
-										" TL"}
-								</span>
-							</React.Fragment>
-						) : (
-							<span>{item.price + " TL"}</span>
-						)}
-					</Header>
-					<Grid container stackable style={{ marginTop: "5px" }}>
-						<Grid.Row>
-							<p floated="left" style={{ fontSize: "1.33em" }}>
-								Beden:
-							</p>
-							<div>
-								{props.state
-									.filter((el) => el.productHeader === item.productHeader)
-									.sort((arg1, arg2) => arg1.size - arg2.size)
-									.map(
-										(ea) =>
-											ea.stock > 0 && (
-												<MyButton
-													key={ea.id}
-													ea={ea}
-													setDummyState={setDummyState}
-													dummyState={dummyState}
-												/>
-											)
-									)}
-							</div>
-						</Grid.Row>
-						<Grid.Row textAlign="center">
-							<div style={{ marginTop: "10px" }}>
-								{message && (
-									<Message
-										warning
-										header="Uyarı"
-										content="Sepete eklemeden önce beden seçmelisiniz."
-									/>
-								)}
-								<Button
-									icon={{
-										name:
-											dummyState &&
-											!(dummyState.stock > 0 || dummyState.length > 0)
-												? "box"
-												: "shopping basket",
-									}}
-									onClick={() => {
-										if (dummyState.id) {
-											props.add2cart(dummyState);
-										} else {
-											setMessage(true);
-											setTimeout(() => setMessage(false), 5000);
-										}
-									}}
-									content={
-										dummyState &&
-										!(dummyState.stock > 0 || dummyState.length > 0)
-											? "Tükendi"
-											: "Sepete Ekle"
-									}
-									disabled={
-										dummyState &&
-										!(dummyState.stock > 0 || dummyState.length > 0)
-									}
-									size="large"
-								/>
-								<p style={{ marginTop: "15px" }}>
-									Tahmini teslimat süresi: 2 gün
-								</p>
-							</div>
-						</Grid.Row>
-					</Grid>
+					<DummyItemProperties
+						props={props}
+						dummyState={dummyState}
+						message={message}
+						item={item}
+						setDummyState={setDummyState}
+						setMessage={setMessage}
+					/>
 				</Grid.Column>
 			</Grid>
 		));

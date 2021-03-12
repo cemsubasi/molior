@@ -1,15 +1,15 @@
 import React from "react";
-import UstGiyim from "./UstGiyim";
+import Tops from "./Tops";
 import HeaderComponent from "../../common/HeaderComponent";
 import NewFooter from "../../common/NewFooter";
 
-function UstGiyimContainer() {
+function TopsContainer() {
 	return (
 		<HeaderComponent>
-			<UstGiyim />
+			<Tops />
 			<NewFooter />
 		</HeaderComponent>
 	);
 }
 
-export default UstGiyimContainer;
+export default TopsContainer;

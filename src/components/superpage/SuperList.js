@@ -37,7 +37,7 @@ const SuperList = (props) => {
 					{props.state
 						.sort((a, b) => a.productHeader.localeCompare(b.productHeader))
 						.map((item, index) => (
-							<React.Fragment key={item.id}>
+							<React.Fragment key={item.productURL}>
 								<Table.Row>
 									<Table.Cell
 										textAlign="center"

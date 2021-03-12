@@ -1,11 +1,9 @@
 import SuperList from "./SuperList";
 import SuperForm from "./SuperForm";
-// import HeaderComponent from "../../common/HeaderComponent";
 import SuperHeader from "./SuperHeader";
 import NewFooter from "../../common/NewFooter";
-import { connect } from "react-redux";
 
-function SuperPageContainer(props) {
+export default function SuperPageContainer() {
 	return (
 		<SuperHeader>
 			<SuperList />
@@ -14,9 +12,3 @@ function SuperPageContainer(props) {
 		</SuperHeader>
 	);
 }
-const mapStateToProps = (state) => {
-	return {
-		superInputState: state.superInputState,
-	};
-};
-export default connect(mapStateToProps)(SuperPageContainer);

@@ -1,15 +1,15 @@
 import React from "react";
-import AltGiyim from "./AltGiyim";
+import Dresses from "./Dresses";
 import HeaderComponent from "../../common/HeaderComponent";
 import NewFooter from "../../common/NewFooter";
 
-function AltGiyimContainer() {
+function ElbiseContainer() {
 	return (
 		<HeaderComponent>
-			<AltGiyim />
+			<Dresses />
 			<NewFooter />
 		</HeaderComponent>
 	);
 }
 
-export default AltGiyimContainer;
+export default ElbiseContainer;

@@ -9,12 +9,10 @@ export const url3 = "/neva";
 export const url4 = "/others/edit";
 export const url5 = "/others/stock";
 
-export const bannerHead = "#iyiolacagiz";
-export const homePageTitle = "Munch Punch ve Negrodan Sevgilerle ";
 export const secret = "munchhh";
 
 const instance = axios.create({
-	baseURL: 'https://molior-server.herokuapp.com',
+	baseURL: "https://molior-server.herokuapp.com",
 	// baseURL: "http://127.0.0.1:4004",
 	timeout: 50000,
 	headers: {
@@ -34,12 +32,14 @@ export const axiosCall = (method, URL, postArg) => {
 
 export const Data = {
 	postState: [],
-	photoState: [],
 	testState: {},
 	cart: [],
 	editState: {},
-	errState: -1,
+	errState: {
+		status: false,
+		classname: "",
+		message: "",
+		error: {},
+	},
 	isAdmin: true,
-	errMessage: "",
-	superInputState: "post",
 };

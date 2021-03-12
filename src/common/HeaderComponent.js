@@ -1,7 +1,7 @@
 import { createMedia } from "@artsy/fresnel";
 import PropTypes from "prop-types";
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { connect } from "react-redux";
 import {
 	Button,
@@ -33,6 +33,7 @@ const DesktopContainer = ({ children, props }) => {
 	const showFixedMenu = () => setState({ fixed: true });
 
 	const { fixed } = state;
+	const history = useHistory();
 
 	return (
 		<Media greaterThan="mobile">
@@ -50,19 +51,45 @@ const DesktopContainer = ({ children, props }) => {
 					size="large"
 				>
 					<Container>
-						<Menu.Item as={Link} to="/" active>
+						<Menu.Item as={Link} to="/">
 							Ana Sayfa
 						</Menu.Item>
-						<Menu.Item as={Link} to="/elbise">
+						<Menu.Item
+							as={Link}
+							to="/elbise"
+							active={
+								history.location.pathname.includes("/elbise") ? true : false
+							}
+						>
 							Elbise
 						</Menu.Item>
-						<Menu.Item as={Link} to="/ust-giyim">
+						<Menu.Item
+							as={Link}
+							to="/ust-giyim"
+							active={
+								history.location.pathname.includes("/ust-giyim") ? true : false
+							}
+						>
 							Üst Giyim
 						</Menu.Item>
-						<Menu.Item as={Link} to="/alt-giyim">
+						<Menu.Item
+							as={Link}
+							to="/alt-giyim"
+							active={
+								history.location.pathname.includes("/alt-giyim") ? true : false
+							}
+						>
 							Alt Giyim
 						</Menu.Item>
-						<Menu.Item as={Link} to="/indirimli-urunler">
+						<Menu.Item
+							as={Link}
+							to="/indirimli-urunler"
+							active={
+								history.location.pathname.includes("/indirimli-urunler")
+									? true
+									: false
+							}
+						>
 							İndirimli Ürünler
 						</Menu.Item>
 						<Menu.Item position="right">
@@ -70,6 +97,7 @@ const DesktopContainer = ({ children, props }) => {
 								as={Link}
 								to="/"
 								icon="search"
+								disabled
 								style={{
 									marginLeft: "0.5em",
 									paddingLeft: "18px",
@@ -79,7 +107,12 @@ const DesktopContainer = ({ children, props }) => {
 							<Button
 								as={Link}
 								to="/sepet"
-								primary
+								primary={history.location.pathname === "/sepet" ? true : false}
+								onClick={
+									history.location.pathname === "/sepet"
+										? (e) => e.preventDefault()
+										: null
+								}
 								style={{
 									marginLeft: "0.5em",
 									paddingLeft: "20px",
@@ -127,6 +160,7 @@ const MobileContainer = ({ children, props }) => {
 	const handleToggle = () => setState({ sidebarOpened: true });
 
 	const { sidebarOpened } = state;
+	const history = useHistory();
 
 	return (
 		<Media as={Sidebar.Pushable} at="mobile">
@@ -139,19 +173,45 @@ const MobileContainer = ({ children, props }) => {
 					vertical
 					visible={sidebarOpened}
 				>
-					<Menu.Item as={Link} to="/" active>
+					<Menu.Item as={Link} to="/">
 						Ana Sayfa
 					</Menu.Item>
-					<Menu.Item as={Link} to="/elbise">
+					<Menu.Item
+						as={Link}
+						to="/elbise"
+						active={
+							history.location.pathname.includes("/elbise") ? true : false
+						}
+					>
 						Elbise
 					</Menu.Item>
-					<Menu.Item as={Link} to="/ust-giyim">
+					<Menu.Item
+						as={Link}
+						to="/ust-giyim"
+						active={
+							history.location.pathname.includes("/ust-giyim") ? true : false
+						}
+					>
 						Üst Giyim
 					</Menu.Item>
-					<Menu.Item as={Link} to="/alt-giyim">
+					<Menu.Item
+						as={Link}
+						to="/alt-giyim"
+						active={
+							history.location.pathname.includes("/alt-giyim") ? true : false
+						}
+					>
 						Alt Giyim
 					</Menu.Item>
-					<Menu.Item as={Link} to="/indirimli-urunler">
+					<Menu.Item
+						as={Link}
+						to="/indirimli-urunler"
+						active={
+							history.location.pathname.includes("/indirimli-urunler")
+								? true
+								: false
+						}
+					>
 						İndirimli Ürünler
 					</Menu.Item>
 				</Sidebar>
@@ -174,6 +234,7 @@ const MobileContainer = ({ children, props }) => {
 										to="/"
 										icon="search"
 										inverted
+										disabled
 										style={{
 											marginLeft: "0.5em",
 											paddingLeft: "18px",
@@ -183,12 +244,19 @@ const MobileContainer = ({ children, props }) => {
 									<Button
 										as={Link}
 										to="/sepet"
-										inverted
+										inverted={
+											history.location.pathname === "/sepet" ? false : true
+										}
 										style={{
 											marginLeft: "0.5em",
 											paddingLeft: "20px",
 											paddingRight: "20px",
 										}}
+										onClick={
+											history.location.pathname === "/sepet"
+												? (e) => e.preventDefault()
+												: null
+										}
 									>
 										<Icon style={{ margin: "0px" }} name="shopping cart" />
 										{props.state && props.state.length > 0 ? (

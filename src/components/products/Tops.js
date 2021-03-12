@@ -1,17 +1,17 @@
 import React from "react";
 import { Header, Container, Grid } from "semantic-ui-react";
 import { connect } from "react-redux";
-import CardComponent from "./CardComponent";
+import CardComponent from "../../common/CardComponent";
 
-function AltGiyim(props) {
+function UstGiyim(props) {
 	return (
 		<React.Fragment>
-			<Header style={{ marginBottom: "25px", textAlign: "center" }}>
-				Alt giyim kategorisi için bulunan sonuçlar
+			<Header style={{ marginBottom: "35px", textAlign: "center" }}>
+				Üst giyim kategorisi için bulunan sonuçlar
 			</Header>
 			<Container style={{ marginBottom: "50px " }}>
 				<Grid>
-					<CardComponent {...props} category="alt-giyim" />
+					<CardComponent {...props} category="ust-giyim" />
 				</Grid>
 			</Container>
 		</React.Fragment>
@@ -23,4 +23,4 @@ const mapStateToProps = (state) => {
 	};
 };
 
-export default connect(mapStateToProps)(AltGiyim);
+export default connect(mapStateToProps)(UstGiyim);

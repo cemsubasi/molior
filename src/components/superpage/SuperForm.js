@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 import {
 	addPost,
@@ -6,12 +6,11 @@ import {
 	featuredPost,
 	replacePost,
 	editPost,
-	setErr,
 } from "./SuperAction";
 import ImageUploading from "react-images-uploading";
 import { dateParsed } from "../../Data";
-import { useEffect } from "react";
 import { Container, Select, Input, Form, Button } from "semantic-ui-react";
+import Alert from "../../common/Alert";
 
 const SuperForm = (props) => {
 	const INITIAL = {
@@ -41,36 +40,16 @@ const SuperForm = (props) => {
 		setImages(imageList);
 	};
 
-	useEffect(() => setInputState(props.editState), [
-		props.editState,
-		setInputState,
-	]);
-
 	const inputStateHandler = (event, data) =>
 		setInputState({
 			...inputState,
 			[event.target.name]: event.target.value,
 			[data.name]: data.value,
 		});
-	const inputStateClear = () =>
-		setInputState({
-			id: Date.now(),
-			productURL: "slug/" + Date.now(),
-			productHeader: "",
-			productBody: "",
-			price: 0,
-			size: "",
-			stock: 0,
-			category: "",
-			collect: "",
-			discount: 0,
-			shipping: false,
-			date: dateParsed,
-			// data_url: "",
-			// file: {},
-			title: "",
-			publish: false,
-		});
+	useEffect(() => setInputState(props.editState), [
+		props.editState,
+		setInputState,
+	]);
 
 	useEffect(
 		() => {
@@ -82,27 +61,26 @@ const SuperForm = (props) => {
 		// eslint-disable-next-line
 		[images]
 	);
-	const setClearInputs = () =>
-		setInputState({
-			...inputState,
-			data_url: "",
-			file: {},
-		});
+	useEffect(
+		() =>
+			setInputState({
+				...inputState,
+				productURL: inputState.category + "/" + Date.now(),
+			}),
+		// eslint-disable-next-line
+		[inputState.category, setInputState]
+	);
 
+	console.log("inputState", inputState);
 	const Submit = () => {
 		//if there is one other with same url then edit that object
-		if (props.state.some((user) => user.productURL === inputState.productURL)) {
-			inputStateClear();
-			props.setErr(0);
+		if (props.state.some((user) => user.id === inputState.id)) {
+			setInputState(INITIAL);
 			return props.replacePost(inputState);
-		} else {
-			inputStateClear();
-			setClearInputs();
-			props.editPost(INITIAL);
-			props.setErr(0);
-
-			return props.addPost(inputState);
 		}
+		props.editPost(INITIAL);
+
+		return props.addPost(inputState);
 	};
 
 	const categoryOptions = [
@@ -126,34 +104,10 @@ const SuperForm = (props) => {
 		{ key: "shipping2", value: false, text: "Ücretli" },
 	];
 
+	console.log(props.state);
 	return (
 		<Container>
-			{(() => {
-				switch (props.errState) {
-					case 0:
-						return (
-							<div className="alert alert-success" role="alert">
-								Post has been sent successfuly!
-							</div>
-						);
-					case 1:
-						return (
-							<div className="alert alert-danger" role="alert">
-								Post Url must be unique and cannot include blank or special
-								charachters! — check it out!
-							</div>
-						);
-					case 2:
-						return (
-							<div className="alert alert-success" role="alert">
-								Post was deleted successfuly!
-							</div>
-						);
-					default:
-						return null;
-				}
-			})()}
-
+			<Alert props={props.errState} />
 			<Form>
 				<Form.Group widths="equal">
 					<Form.Field
@@ -341,7 +295,6 @@ const mapStateToProps = (state) => {
 		state: state.postState,
 		editState: state.editState,
 		errState: state.errState,
-		err: state.errMessage,
 	};
 };
 
@@ -351,5 +304,4 @@ export default connect(mapStateToProps, {
 	featuredPost,
 	replacePost,
 	editPost,
-	setErr,
 })(SuperForm);
