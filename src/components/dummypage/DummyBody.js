@@ -23,13 +23,10 @@ const DummyBody = (props) => {
 				<Grid.Column width={10}>
 					<Reveal animated="move right">
 						<Reveal.Content visible>
-							<Image src={item.data_url} size="medium" />
+							<Image src={item.images[0].data_url} size="large" />
 						</Reveal.Content>
 						<Reveal.Content hidden>
-							<Image
-								src="https://cdn.dsmcdn.com/mnresize/415/622/ty76/product/media/images/20210225/14/66899714/142499060/5/5_org_zoom.jpg"
-								size="medium"
-							/>
+							<Image src={item.images[1].data_url} size="large" />
 						</Reveal.Content>
 					</Reveal>
 				</Grid.Column>

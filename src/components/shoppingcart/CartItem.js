@@ -5,7 +5,12 @@ import { Icon, Button, List, Image } from "semantic-ui-react";
 function CartItem({ props, item }) {
 	return (
 		<List.Item>
-			<Image rounded size="small" floated="left" src={item.data_url} />
+			<Image
+				rounded
+				size="small"
+				floated="left"
+				src={item.images[0].data_url}
+			/>
 			<List.Content
 				floated="left"
 				style={{

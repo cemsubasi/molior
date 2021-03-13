@@ -12,13 +12,18 @@ function DiscountLabel({ props }) {
 					icon: "percent",
 					ribbon: true,
 				}}
-				src={props.data_url}
+				src={props.images[0].data_url}
 				wrapped
 				ui={false}
 			/>
 		);
 	return (
-		<Image style={{ margin: "auto" }} src={props.data_url} wrapped ui={false} />
+		<Image
+			style={{ margin: "auto" }}
+			src={props.images[0].data_url}
+			wrapped
+			ui={false}
+		/>
 	);
 }
 export default DiscountLabel;

@@ -3,11 +3,14 @@ import { Data } from "../Data";
 export const reducer = (state = Data, action) => {
 	switch (action.type) {
 		case "FETCH_POSTS":
-			return { ...state, postState: [...state.postState, ...action.payload] };
+			return {
+				...state,
+				postState: [...state.postState, ...action.payload],
+			};
 		case "ADD_POST":
 			return {
 				...state,
-				postState: [...state.postState, { ...action.payload }],
+				postState: [...state.postState, action.payload],
 			};
 		case "DELETE_POST":
 			return {

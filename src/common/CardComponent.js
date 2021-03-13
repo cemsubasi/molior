@@ -14,7 +14,7 @@ function CardComponent(props) {
 				props.state
 					.filter(
 						(item) =>
-							item.category === "elbise" && item.stock > 0 && item.publish
+							item.category === props.category && item.stock > 0 && item.publish
 					)
 					.sort((a, b) => b.discount - a.discount)
 					.filter(
@@ -23,7 +23,7 @@ function CardComponent(props) {
 							self.findIndex((e) => e.productHeader === item.productHeader)
 					)
 			);
-	}, [props.state]);
+	}, [props.state, props.category]);
 	// useEffect(() => {
 	// 	if (props.state)
 	// 		setState(

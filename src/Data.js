@@ -12,8 +12,8 @@ export const url5 = "/others/stock";
 export const secret = "munchhh";
 
 const instance = axios.create({
-	baseURL: "https://molior-server.herokuapp.com",
-	// baseURL: "http://127.0.0.1:4004",
+	// baseURL: "https://molior-server.herokuapp.com",
+	baseURL: "http://127.0.0.1:4004",
 	timeout: 50000,
 	headers: {
 		"Access-Control-Allow-Origin": "*",

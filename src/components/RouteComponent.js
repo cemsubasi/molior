@@ -23,8 +23,8 @@ const RouteComponent = (props) => {
 					<Route exact path="/" component={HomePageContainer} />
 					<Route path="/about" component={AboutPageContainer} />
 					<Route exact path="/elbise" component={DressesContainer} />
-					<Route path="/alt-giyim" component={BottomsContainer} />
-					<Route path="/ust-giyim" component={TopsContainer} />
+					<Route exact path="/alt-giyim" component={BottomsContainer} />
+					<Route exact path="/ust-giyim" component={TopsContainer} />
 					<Route path="/indirimli-urunler" component={DiscountsContainer} />
 					<Route path="/sepet" component={CartContainer} />
 					<Route path="/supertest" component={SuperTest} />

@@ -23,6 +23,8 @@ const Client = (props) => {
 		props.cart,
 	]);
 
+	console.log(URL);
+
 	return <RouteComponent />;
 };
 

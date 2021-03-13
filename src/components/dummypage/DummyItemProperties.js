@@ -38,9 +38,9 @@ function DummyItemProperties({
 	return (
 		<>
 			<Header as="h3" style={{ fontSize: "2em" }}>
-				Molior Spring Collection #21 Black Queen
+				{item.productHeader}
 			</Header>
-			<p style={{ fontSize: "1.33em" }}>Siyah Fisto Detaylı Vual Plaj Elbise</p>
+			<p style={{ fontSize: "1.33em" }}>{item.productBody}</p>
 			<CardContent style={{ fontSize: "1.33em" }} props={dummyState} />
 			<Header style={{ fontSize: "1.33em" }}>
 				<CardDescription props={dummyState} />

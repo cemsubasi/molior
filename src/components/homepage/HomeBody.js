@@ -91,7 +91,7 @@ const HomeBody = () => {
 								Üst Giyim
 							</Header>
 							<p style={{ fontSize: "1.33em" }}>
-								Beğenebileceğinizi düşündüğümüz en yeni elbise modellerini
+								Beğenebileceğinizi düşündüğümüz en yeni üst giyim modellerini
 								burada topladık.
 							</p>
 							<Header as="h3" style={{ fontSize: "1.5em" }}>
@@ -126,7 +126,7 @@ const HomeBody = () => {
 								Alt Giyim
 							</Header>
 							<p style={{ fontSize: "1.33em" }}>
-								Beğenebileceğinizi düşündüğümüz en yeni elbise modellerini
+								Beğenebileceğinizi düşündüğümüz en yeni alt giyim modellerini
 								burada topladık.
 							</p>
 							<Header as="h3" style={{ fontSize: "1.5em" }}>

@@ -26,14 +26,13 @@ const SuperForm = (props) => {
 		discount: 0,
 		shipping: false,
 		date: dateParsed,
-		data_url: "",
-		file: {},
 		title: "",
 		publish: false,
+		images: [],
 	};
 	const [inputState, setInputState] = useState(INITIAL);
 	const [images, setImages] = useState([]);
-	const maxNumber = 1;
+	const maxNumber = 2;
 	const onChange = (imageList, addUpdateIndex) => {
 		// data for submit
 		// console.log(imageList, addUpdateIndex);
@@ -55,7 +54,7 @@ const SuperForm = (props) => {
 		() => {
 			setInputState({
 				...inputState,
-				...images[0],
+				images,
 			});
 		},
 		// eslint-disable-next-line
@@ -72,6 +71,7 @@ const SuperForm = (props) => {
 	);
 
 	console.log("inputState", inputState);
+	console.log("images", images);
 	const Submit = () => {
 		//if there is one other with same url then edit that object
 		if (props.state.some((user) => user.id === inputState.id)) {
@@ -219,7 +219,13 @@ const SuperForm = (props) => {
 						maxNumber={maxNumber}
 						dataURLKey="data_url"
 					>
-						{({ imageList, onImageUpload, onImageRemove, dragProps }) => (
+						{({
+							imageList,
+							onImageUpload,
+							onImageRemove,
+							onImageRemoveAll,
+							dragProps,
+						}) => (
 							// write your building UI
 							<div className="upload__image-wrapper m-auto">
 								{imageList.map((image, index) => (
@@ -243,7 +249,7 @@ const SuperForm = (props) => {
 								<Input
 									{...dragProps}
 									onClick={() => {
-										onImageRemove();
+										onImageRemoveAll();
 										onImageUpload();
 									}}
 									type="file"
@@ -270,15 +276,8 @@ const SuperForm = (props) => {
 										label="Temizle"
 										onClick={() => {
 											props.editPost(INITIAL);
+											onImageRemoveAll();
 										}}
-									/>
-									<Form.Field
-										id="form-button-control-public"
-										control={Button}
-										color="red"
-										label="Foto Temizle"
-										content="Foto Temizle"
-										onClick={onImageRemove}
 									/>
 								</Form.Group>
 							</div>

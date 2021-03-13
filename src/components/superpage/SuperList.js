@@ -34,131 +34,141 @@ const SuperList = (props) => {
 				</Table.Header>
 
 				<Table.Body>
-					{props.state
-						.sort((a, b) => a.productHeader.localeCompare(b.productHeader))
-						.map((item, index) => (
-							<React.Fragment key={item.productURL}>
-								<Table.Row>
-									<Table.Cell
-										textAlign="center"
-										style={{ fontSize: "1.35em", verticalAlign: "middle" }}
-										negative={item.stock < 1 ? true : false}
-										positive={item.stock > 0 ? true : false}
-										selectable
-									>
-										{index}
-									</Table.Cell>
-									<Table.Cell
-										style={{
-											fontSize: "1.35em",
-											verticalAlign: "middle",
-											padding: ".5em .2em",
-										}}
-										negative={item.stock < 1 ? true : false}
-										positive={item.stock > 0 ? true : false}
-										selectable
-									>
-										<Header as={Link} to={item.productURL} image>
-											<Image src={item.data_url} rounded size="mini" />
-											<Header.Content>
-												{item.productHeader}
-												<Header.Subheader> Beden: {item.size}</Header.Subheader>
-											</Header.Content>
-										</Header>
-									</Table.Cell>
-									<Table.Cell
-										textAlign="center"
-										style={{ fontSize: "1.55em", verticalAlign: "middle" }}
-										negative={item.stock < 1 ? true : false}
-										positive={item.stock > 0 ? true : false}
-										selectable
-									>
-										<Button.Group size="large" style={{}}>
-											<Button
-												icon
-												onClick={() => props.handleStock({ ...item, count: 1 })}
-											>
-												<Icon name="plus" />
+					{props.state.map &&
+						props.state
+							.sort((a, b) => a.productHeader.localeCompare(b.productHeader))
+							.map((item, index) => (
+								<React.Fragment key={item.productURL}>
+									<Table.Row>
+										<Table.Cell
+											textAlign="center"
+											style={{ fontSize: "1.35em", verticalAlign: "middle" }}
+											negative={item.stock < 1 ? true : false}
+											positive={item.stock > 0 ? true : false}
+											selectable
+										>
+											{index}
+										</Table.Cell>
+										<Table.Cell
+											style={{
+												fontSize: "1.35em",
+												verticalAlign: "middle",
+												padding: ".5em .2em",
+											}}
+											negative={item.stock < 1 ? true : false}
+											positive={item.stock > 0 ? true : false}
+											selectable
+										>
+											<Header as={Link} to={item.productURL} image>
+												<Image
+													src={item.images[0].data_url}
+													rounded
+													size="mini"
+												/>
+												<Header.Content>
+													{item.productHeader}
+													<Header.Subheader>
+														{" "}
+														Beden: {item.size}
+													</Header.Subheader>
+												</Header.Content>
+											</Header>
+										</Table.Cell>
+										<Table.Cell
+											textAlign="center"
+											style={{ fontSize: "1.55em", verticalAlign: "middle" }}
+											negative={item.stock < 1 ? true : false}
+											positive={item.stock > 0 ? true : false}
+											selectable
+										>
+											<Button.Group size="large" style={{}}>
+												<Button
+													icon
+													onClick={() =>
+														props.handleStock({ ...item, count: 1 })
+													}
+												>
+													<Icon name="plus" />
+												</Button>
+												<Button.Or
+													style={{ fontSize: "17px" }}
+													text={item.stock}
+												/>
+												<Button
+													icon
+													onClick={() =>
+														props.handleStock({ ...item, count: -1 })
+													}
+												>
+													<Icon name="minus" />
+												</Button>
+											</Button.Group>
+										</Table.Cell>
+										<Table.Cell
+											textAlign="center"
+											style={{ fontSize: "1.35em", verticalAlign: "middle" }}
+											negative={item.stock < 1 ? true : false}
+											positive={item.stock > 0 ? true : false}
+											selectable
+										>
+											<Icon size="small" name="percent" />
+											{item.discount}
+										</Table.Cell>
+										<Table.Cell
+											textAlign="center"
+											style={{ fontSize: "1.35em", verticalAlign: "middle" }}
+											negative={item.stock < 1 ? true : false}
+											positive={item.stock > 0 ? true : false}
+											selectable
+										>
+											{item.price -
+												((item.price * item.discount) / 100).toFixed(2) +
+												" TL"}
+										</Table.Cell>
+										<Table.Cell
+											textAlign="center"
+											style={{ fontSize: "1.35em", verticalAlign: "middle" }}
+											negative={item.stock < 1 ? true : false}
+											positive={item.stock > 0 ? true : false}
+											selectable
+										>
+											<Button onClick={() => props.editPost(item)}>
+												<Icon style={{ margin: "auto" }} name="setting" />
 											</Button>
-											<Button.Or
-												style={{ fontSize: "17px" }}
-												text={item.stock}
-											/>
 											<Button
-												icon
 												onClick={() =>
-													props.handleStock({ ...item, count: -1 })
+													props.editPost({
+														...item,
+														id: Date.now(),
+														productURL: "slug/" + Date.now(),
+													})
 												}
 											>
-												<Icon name="minus" />
+												<Icon style={{ margin: "auto" }} name="copy" />
 											</Button>
-										</Button.Group>
-									</Table.Cell>
-									<Table.Cell
-										textAlign="center"
-										style={{ fontSize: "1.35em", verticalAlign: "middle" }}
-										negative={item.stock < 1 ? true : false}
-										positive={item.stock > 0 ? true : false}
-										selectable
-									>
-										<Icon size="small" name="percent" />
-										{item.discount}
-									</Table.Cell>
-									<Table.Cell
-										textAlign="center"
-										style={{ fontSize: "1.35em", verticalAlign: "middle" }}
-										negative={item.stock < 1 ? true : false}
-										positive={item.stock > 0 ? true : false}
-										selectable
-									>
-										{item.price -
-											((item.price * item.discount) / 100).toFixed(2) +
-											" TL"}
-									</Table.Cell>
-									<Table.Cell
-										textAlign="center"
-										style={{ fontSize: "1.35em", verticalAlign: "middle" }}
-										negative={item.stock < 1 ? true : false}
-										positive={item.stock > 0 ? true : false}
-										selectable
-									>
-										<Button onClick={() => props.editPost(item)}>
-											<Icon style={{ margin: "auto" }} name="setting" />
-										</Button>
-										<Button
-											onClick={() =>
-												props.editPost({
-													...item,
-													id: Date.now(),
-													productURL: "slug/" + Date.now(),
-												})
-											}
-										>
-											<Icon style={{ margin: "auto" }} name="copy" />
-										</Button>
-										<Button onClick={() => props.deletePost(item.productURL)}>
-											<Icon style={{ margin: "auto" }} name="trash" />
-										</Button>
-										<Button
-											color={item.publish ? "green" : "red"}
-											onClick={() => props.featuredPost(item)}
-										>
-											<Icon
-												style={{ margin: "auto" }}
-												name={item.publish ? "eye" : "eye slash outline"}
-											/>
-										</Button>
-										<Button
-											as={Link}
-											to="/supertest"
-											onClick={() => props.setTest(item)}
-										>
-											<Icon style={{ margin: "auto" }} name="tv" />
-										</Button>
-									</Table.Cell>
-								</Table.Row>
-							</React.Fragment>
-						))}
+											<Button onClick={() => props.deletePost(item.productURL)}>
+												<Icon style={{ margin: "auto" }} name="trash" />
+											</Button>
+											<Button
+												color={item.publish ? "green" : "red"}
+												onClick={() => props.featuredPost(item)}
+											>
+												<Icon
+													style={{ margin: "auto" }}
+													name={item.publish ? "eye" : "eye slash outline"}
+												/>
+											</Button>
+											<Button
+												as={Link}
+												to="/supertest"
+												onClick={() => props.setTest(item)}
+											>
+												<Icon style={{ margin: "auto" }} name="tv" />
+											</Button>
+										</Table.Cell>
+									</Table.Row>
+								</React.Fragment>
+							))}
 				</Table.Body>
 			</Table>
 		</Container>
