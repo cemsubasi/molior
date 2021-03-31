@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import { Step, Grid, Icon } from "semantic-ui-react";
 
 function CartBanner({ select }) {
@@ -29,5 +30,9 @@ function CartBanner({ select }) {
 		</Grid>
 	);
 }
+
+CartBanner.propTypes = {
+	select: PropTypes.string,
+};
 
 export default CartBanner;

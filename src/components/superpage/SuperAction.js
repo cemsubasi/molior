@@ -1,4 +1,4 @@
-import { axiosCall, url2, url4, url5 } from "../../Data";
+import { axiosCall, url2, url4, url5 } from "../../data";
 const succObj = {
 	status: true,
 	classname: "alert alert-success",

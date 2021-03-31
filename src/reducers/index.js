@@ -1,6 +1,6 @@
-import { Data } from "../Data";
+import { data } from "../data";
 
-export const reducer = (state = Data, action) => {
+export const reducer = (state = data, action) => {
 	switch (action.type) {
 		case "FETCH_POSTS":
 			return {

@@ -1,6 +1,6 @@
 import React from "react";
 import HeaderComponent from "./HeaderComponent";
-import NewFooter from "./NewFooter";
+import Footer from "./Footer";
 
 const Page404 = () => {
 	return (
@@ -17,7 +17,7 @@ const Page404 = () => {
 					404 Page Not Found!
 				</h1>
 			</HeaderComponent>
-			<NewFooter />
+			<Footer />
 		</React.Fragment>
 	);
 };

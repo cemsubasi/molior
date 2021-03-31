@@ -1,8 +1,9 @@
 import { useState } from "react";
+import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { setAdmin } from "./LoginAction";
-import { url3 } from "../../Data";
+import { url3 } from "../../data";
 
 import logo from "../../images/logo1.svg";
 
@@ -59,6 +60,12 @@ const LoginBody = (props) => {
 			</div>
 		</div>
 	);
+};
+
+LoginBody.propTypes = {
+	state: PropTypes.array,
+	isAdmin: PropTypes.bool,
+	setAdmin: PropTypes.func,
 };
 
 const mapStateToProps = (state) => {

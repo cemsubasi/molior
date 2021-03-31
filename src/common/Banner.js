@@ -15,7 +15,7 @@ const { MediaContextProvider, Media } = createMedia({
  * HomepageHeading uses inline styling, however it's not the best practice. Use CSS or styled
  * components for such things.
  */
-const NewBanner = ({ mobile }) => (
+const Banner = ({ mobile }) => (
 	<Container
 		text
 		style={
@@ -59,8 +59,8 @@ const NewBanner = ({ mobile }) => (
 	</Container>
 );
 
-NewBanner.propTypes = {
+Banner.propTypes = {
 	mobile: PropTypes.bool,
 };
 
-export default NewBanner;
+export default Banner;

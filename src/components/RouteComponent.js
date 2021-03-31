@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { connect } from "react-redux";
 import SuperPageContainer from "./superpage/SuperPageContainer";
@@ -11,9 +12,10 @@ import BottomsContainer from "./products/BottomsContainer";
 import TopsContainer from "./products/TopsContainer";
 import DiscountsContainer from "./products/DiscountsContainer";
 import CartContainer from "./shoppingcart/CartContainer";
+import PaymentContainer from "./paymentpage/PaymentContainer";
 import SuperTest from "./superpage/SuperTest";
 import Page404 from "../common/404";
-import { url3 } from "../Data";
+import { url3 } from "../data";
 
 const RouteComponent = (props) => {
 	return (
@@ -28,6 +30,7 @@ const RouteComponent = (props) => {
 					<Route path="/indirimli-urunler" component={DiscountsContainer} />
 					<Route path="/sepet" component={CartContainer} />
 					<Route path="/supertest" component={SuperTest} />
+					<Route path="/payment" component={PaymentContainer} />
 					<Route
 						path={url3}
 						render={() =>
@@ -45,6 +48,11 @@ const RouteComponent = (props) => {
 		</Router>
 	);
 };
+
+RouteComponent.propTypes = {
+	isAdmin: PropTypes.bool,
+};
+
 const mapStateToProps = (state) => {
 	return {
 		isAdmin: state.isAdmin,

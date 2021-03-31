@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import { Table, Header, Icon } from "semantic-ui-react";
 
 function CartBill({ props }) {
@@ -40,10 +41,12 @@ function CartBill({ props }) {
 						<Header as="h4">İndirim</Header>
 					</Table.Cell>
 					<Table.Cell textAlign="right">
-						{props.state.reduce(
-							(total, curr) => total - (curr.discount * +curr.price) / 100,
-							0
-						) + " TL"}
+						{props.state
+							.reduce(
+								(total, curr) => total - (curr.discount * +curr.price) / 100,
+								0
+							)
+							.toFixed(2) + " TL"}
 					</Table.Cell>
 				</Table.Row>
 				<Table.Row>
@@ -57,15 +60,20 @@ function CartBill({ props }) {
 						<Header as="h4">Tutar</Header>
 					</Table.Cell>
 					<Table.Cell textAlign="right">
-						{props.state.reduce(
-							(total, curr) =>
-								total + +curr.price - (curr.discount * +curr.price) / 100,
-							0
-						) + " TL"}
+						{props.state
+							.reduce(
+								(total, curr) =>
+									total + +curr.price - (curr.discount * +curr.price) / 100,
+								0
+							)
+							.toFixed(2) + " TL"}
 					</Table.Cell>
 				</Table.Row>
 			</Table.Body>
 		</Table>
 	);
 }
+CartBill.propTypes = {
+	props: PropTypes.object,
+};
 export default CartBill;

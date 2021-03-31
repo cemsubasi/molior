@@ -1,15 +1,15 @@
 import React from "react";
-import Dresses from "./Dresses";
+import PaymentBody from "./PaymentBody";
 import HeaderComponent from "../../common/HeaderComponent";
 import Footer from "../../common/Footer";
 
-function ElbiseContainer() {
+function PaymentContainer() {
 	return (
 		<HeaderComponent>
-			<Dresses />
+			<PaymentBody />
 			<Footer />
 		</HeaderComponent>
 	);
 }
 
-export default ElbiseContainer;
+export default PaymentContainer;

@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import PropTypes from "prop-types";
 import { Message, Grid, Header, Button } from "semantic-ui-react";
 import CardContent from "../../common/CardContent";
 import CardDescription from "../../common/CardDescription";
@@ -15,7 +16,6 @@ const MyButton = ({ props, ea, setDummyState, dummyState }) => {
 				.filter((item) => item.stock > 0)[0]
 		);
 	}, [ea.productHeader, props.state, setDummyState]);
-
 	return (
 		<Button
 			key={ea.productURL}
@@ -25,6 +25,15 @@ const MyButton = ({ props, ea, setDummyState, dummyState }) => {
 			{ea.size}
 		</Button>
 	);
+};
+
+MyButton.propTypes = {
+	props: PropTypes.object,
+	item: PropTypes.object,
+	dummyState: PropTypes.object,
+	message: PropTypes.bool,
+	setDummyState: PropTypes.func,
+	setMessage: PropTypes.func,
 };
 
 function DummyItemProperties({
@@ -111,6 +120,14 @@ function DummyItemProperties({
 		</>
 	);
 }
+DummyItemProperties.propTypes = {
+	props: PropTypes.object,
+	item: PropTypes.object,
+	dummyState: PropTypes.object,
+	message: PropTypes.bool,
+	setDummyState: PropTypes.func,
+	setMessage: PropTypes.func,
+};
 
 export default DummyItemProperties;
 // {props.state

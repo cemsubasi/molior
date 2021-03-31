@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import PropTypes from "prop-types";
 import { useLocation } from "react-router-dom";
 import { connect } from "react-redux";
 import { Reveal, Image, Grid } from "semantic-ui-react";
@@ -46,6 +47,12 @@ const DummyBody = (props) => {
 				</Grid.Column>
 			</Grid>
 		));
+};
+
+DummyBody.propTypes = {
+	state: PropTypes.array,
+	cart: PropTypes.array,
+	add2cart: PropTypes.func,
 };
 
 const mapStateToProps = (state) => {

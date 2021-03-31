@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import {
 	addPost,
@@ -8,7 +9,7 @@ import {
 	editPost,
 } from "./SuperAction";
 import ImageUploading from "react-images-uploading";
-import { dateParsed } from "../../Data";
+import { dateParsed } from "../../data";
 import { Container, Select, Input, Form, Button } from "semantic-ui-react";
 import Alert from "../../common/Alert";
 
@@ -287,6 +288,12 @@ const SuperForm = (props) => {
 			</Form>
 		</Container>
 	);
+};
+
+SuperForm.propTypes = {
+	state: PropTypes.array,
+	editState: PropTypes.object,
+	errState: PropTypes.object,
 };
 
 const mapStateToProps = (state) => {

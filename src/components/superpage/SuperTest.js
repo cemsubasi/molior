@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import { useHistory } from "react-router-dom";
 import { connect } from "react-redux";
 import { Icon, Reveal, Image, Grid, Header, Button } from "semantic-ui-react";
@@ -18,13 +19,10 @@ const SuperTest = (props) => {
 				<Grid.Column width={10}>
 					<Reveal animated="move right">
 						<Reveal.Content visible>
-							<Image src={props.state.data_url} size="medium" />
+							<Image src={props.state.images[0].data_url} size="large" />
 						</Reveal.Content>
 						<Reveal.Content hidden>
-							<Image
-								src="https://cdn.dsmcdn.com/mnresize/415/622/ty76/product/media/images/20210225/14/66899714/142499060/5/5_org_zoom.jpg"
-								size="medium"
-							/>
+							<Image src={props.state.images[1].data_url} size="large" />
 						</Reveal.Content>
 					</Reveal>
 				</Grid.Column>
@@ -34,11 +32,9 @@ const SuperTest = (props) => {
 					style={{ marginLeft: "0px", borderLeft: "1px solid rgba(0,0,0,0.1)" }}
 				>
 					<Header as="h3" style={{ fontSize: "2em" }}>
-						Molior Spring Collection #21 Black Queen
+						{props.state.productHeader}
 					</Header>
-					<p style={{ fontSize: "1.33em" }}>
-						Siyah Fisto Detaylı Vual Plaj Elbise
-					</p>
+					<p style={{ fontSize: "1.33em" }}>{props.state.productBody}</p>
 					{props.state.discount > 0 && props.state.price > 149 ? (
 						<React.Fragment>
 							<div style={{ fontSize: "1.33em" }}>
@@ -111,6 +107,10 @@ const SuperTest = (props) => {
 			</Grid>
 		</SuperHeader>
 	);
+};
+
+SuperTest.propTypes = {
+	state: PropTypes.object,
 };
 
 const mapStateToProps = (state) => {

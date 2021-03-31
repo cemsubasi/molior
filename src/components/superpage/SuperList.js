@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import {
 	addPost,
@@ -173,6 +174,12 @@ const SuperList = (props) => {
 			</Table>
 		</Container>
 	);
+};
+
+SuperList.propTypes = {
+	state: PropTypes.array,
+	editState: PropTypes.object,
+	errState: PropTypes.object,
 };
 
 const mapStateToProps = (state) => {

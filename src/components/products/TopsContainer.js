@@ -1,13 +1,13 @@
 import React from "react";
 import Tops from "./Tops";
 import HeaderComponent from "../../common/HeaderComponent";
-import NewFooter from "../../common/NewFooter";
+import Footer from "../../common/Footer";
 
 function TopsContainer() {
 	return (
 		<HeaderComponent>
 			<Tops />
-			<NewFooter />
+			<Footer />
 		</HeaderComponent>
 	);
 }

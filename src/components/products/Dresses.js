@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import { Header, Container, Grid } from "semantic-ui-react";
 import { connect } from "react-redux";
 import CardComponent from "../../common/CardComponent";
@@ -17,6 +18,11 @@ function Dresses(props) {
 		</React.Fragment>
 	);
 }
+
+Dresses.propTypes = {
+	state: PropTypes.array,
+	cart: PropTypes.array,
+};
 const mapStateToProps = (state) => {
 	return {
 		state: state.postState,

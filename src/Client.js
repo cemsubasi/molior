@@ -1,4 +1,5 @@
-import { useEffect } from "react";
+import React, { useEffect } from "react";
+import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import RouteComponent from "./components/RouteComponent";
 import { fetchPosts } from "./components/homepage/HomeAction";
@@ -23,9 +24,14 @@ const Client = (props) => {
 		props.cart,
 	]);
 
-	console.log(URL);
-
 	return <RouteComponent />;
+};
+
+Client.propTypes = {
+	postState: PropTypes.array,
+	cart: PropTypes.array,
+	fetchPosts: PropTypes.func,
+	add2storage: PropTypes.func,
 };
 
 const mapStateToProps = (state) => {

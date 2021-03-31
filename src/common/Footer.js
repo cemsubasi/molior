@@ -9,7 +9,7 @@ import {
 	Segment,
 } from "semantic-ui-react";
 
-const NewBanner = () => {
+const Footer = () => {
 	return (
 		<Segment inverted vertical style={{ padding: "5em 0em" }}>
 			<Container>
@@ -65,4 +65,4 @@ const NewBanner = () => {
 	);
 };
 
-export default NewBanner;
+export default Footer;

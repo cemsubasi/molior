@@ -1,13 +1,13 @@
 import React from "react";
 import AboutBody from "./AboutBody";
 import HeaderComponent from "../../common/HeaderComponent";
-import NewFooter from "../../common/NewFooter";
+import Footer from "../../common/Footer";
 
 function AboutPageContainer() {
 	return (
 		<HeaderComponent>
 			<AboutBody />
-			<NewFooter />
+			<Footer />
 		</HeaderComponent>
 	);
 }

@@ -1,14 +1,14 @@
 import React from "react";
 import { connect } from "react-redux";
 import HeaderComponent from "../../common/HeaderComponent";
-import NewFooter from "../../common/NewFooter";
+import Footer from "../../common/Footer";
 import DummyBody from "./DummyBody";
 
 const DummyPageContainer = (props) => {
 	return (
 		<HeaderComponent>
 			<DummyBody />
-			<NewFooter />
+			<Footer />
 		</HeaderComponent>
 	);
 };

@@ -1,16 +1,17 @@
 import React, { useState, useEffect } from "react";
+import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { Grid, Container, Button, List } from "semantic-ui-react";
 import { add2cart } from "../dummypage/DummyAction";
 import { deleteFromCart, banFromCart } from "./CartAction";
-import { axiosCall } from "../../Data";
+import { axiosCall } from "../../data";
 import CartPlaceholder from "./CartPlaceholder";
 import CartBanner from "./CartBanner";
 import CartItem from "./CartItem";
 import CartBill from "./CartBill";
 
-function Cart(props) {
-	const [state, setState] = useState({});
+function CartBody({ props }) {
+	const [state, setState] = useState([]);
 
 	useEffect(
 		() =>
@@ -24,41 +25,45 @@ function Cart(props) {
 	);
 
 	function click(arg) {
-		return axiosCall("post", "/offer", arg).then((res) =>
-			console.log("answer", res)
-		);
+		return axiosCall("post", "/offer", arg)
+			.then((res) => console.log("answer", res))
+			.catch((err) => console.log("Baglanti Hatasi: Cart", err));
 	}
 
-	function CartBody({ props }) {
-		return (
-			<>
-				<CartBanner select="cart" />
-				<Grid columns={2} stackable textAlign="center">
-					<Grid.Row>
-						<Grid.Column width={12} style={{ margin: "auto" }}>
-							<List relaxed="very" style={{ margin: "10px" }}>
-								{state.map &&
-									state.map((item, index) => (
-										<CartItem props={props} item={item} key={index} />
-									))}
-							</List>
-						</Grid.Column>
-						<Grid.Column width={4} style={{ textAlign: "center" }}>
-							<CartBill props={props} />
-							<Button
-								primary
-								onClick={() => click(props.state)}
-								style={{ margin: "1em 0", textAlign: "center" }}
-							>
-								Sepeti Onayla
-							</Button>
-						</Grid.Column>
-					</Grid.Row>
-				</Grid>
-			</>
-		);
-	}
+	return (
+		<>
+			<CartBanner select="cart" />
+			<Grid columns={2} stackable textAlign="center">
+				<Grid.Row>
+					<Grid.Column width={12} style={{ margin: "auto" }}>
+						<List relaxed="very" style={{ margin: "10px" }}>
+							{state.map &&
+								state.map((item, index) => (
+									<CartItem props={props} item={item} key={index} />
+								))}
+						</List>
+					</Grid.Column>
+					<Grid.Column width={4} style={{ textAlign: "center" }}>
+						<CartBill props={props} />
+						<Button
+							primary
+							onClick={() => click(props.state)}
+							style={{ margin: "1em 0", textAlign: "center" }}
+						>
+							Sepeti Onayla
+						</Button>
+					</Grid.Column>
+				</Grid.Row>
+			</Grid>
+		</>
+	);
+}
 
+CartBody.propTypes = {
+	props: PropTypes.object,
+};
+
+function Cart(props) {
 	return (
 		<Container style={{ margin: "3em 0 8em 0" }}>
 			{props.state.length > 0 ? (
@@ -72,6 +77,12 @@ function Cart(props) {
 		</Container>
 	);
 }
+
+Cart.propTypes = {
+	add2cart: PropTypes.func,
+	deleteFromCart: PropTypes.func,
+	banFromCart: PropTypes.func,
+};
 const mapStateToProps = (state) => {
 	return {
 		state: state.cart,

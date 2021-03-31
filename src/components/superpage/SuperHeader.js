@@ -47,10 +47,10 @@ const DesktopContainer = ({ children }) => {
 					size="large"
 				>
 					<Container>
-						<Menu.Item as={Link} to="/" active>
+						<Menu.Item as={Link} to="/">
 							Ana Sayfa
 						</Menu.Item>
-						<Menu.Item as={Link} to="/neva">
+						<Menu.Item as={Link} to="/neva" active>
 							Neva
 						</Menu.Item>
 						<Menu.Item as={Link} to="/orders">

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import { Header, Card, Container, Grid } from "semantic-ui-react";
 import { connect } from "react-redux";
@@ -46,6 +47,10 @@ function CardComponent(props) {
 	);
 }
 
+CardComponent.propTypes = {
+	props: PropTypes.array,
+};
+
 function Discounts(props) {
 	return (
 		<React.Fragment>
@@ -60,6 +65,9 @@ function Discounts(props) {
 		</React.Fragment>
 	);
 }
+Discounts.propTypes = {
+	state: PropTypes.array,
+};
 const mapStateToProps = (state) => {
 	return {
 		state: state.postState,
