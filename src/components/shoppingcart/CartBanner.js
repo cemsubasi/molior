@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
+import { Link } from "react-router-dom";
 import { Step, Grid, Icon } from "semantic-ui-react";
 
 function CartBanner({ select }) {
@@ -7,13 +8,18 @@ function CartBanner({ select }) {
 		<Grid columns={2} stackable textAlign="center" style={{ margin: "1em 0" }}>
 			<Grid.Row style={{ marginBottom: "1em" }}>
 				<Step.Group widths={3} style={{ padding: "0px" }}>
-					<Step active={select === "cart"} disabled={select !== "cart"}>
+					<Step active={select === "cart"} as={Link} to="/sepet">
 						<Icon name="shopping cart" />
 						<Step.Content>
 							<Step.Title>Sepet</Step.Title>
 						</Step.Content>
 					</Step>
-					<Step active={select === "card"} disabled={select !== "card"}>
+					<Step
+						active={select === "card"}
+						as={Link}
+						to="/payment"
+						disabled={select !== "card"}
+					>
 						<Icon name="credit card" />
 						<Step.Content>
 							<Step.Title>Ödeme</Step.Title>

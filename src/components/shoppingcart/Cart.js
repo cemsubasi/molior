@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import { Grid, Container, Button, List } from "semantic-ui-react";
 import { add2cart } from "../dummypage/DummyAction";
 import { deleteFromCart, banFromCart } from "./CartAction";
-import { axiosCall } from "../../data";
+import { Link } from "react-router-dom";
 import CartPlaceholder from "./CartPlaceholder";
 import CartBanner from "./CartBanner";
 import CartItem from "./CartItem";
@@ -24,12 +24,6 @@ function CartBody({ props }) {
 		[props.state]
 	);
 
-	function click(arg) {
-		return axiosCall("post", "/offer", arg)
-			.then((res) => console.log("answer", res))
-			.catch((err) => console.log("Baglanti Hatasi: Cart", err));
-	}
-
 	return (
 		<>
 			<CartBanner select="cart" />
@@ -46,8 +40,9 @@ function CartBody({ props }) {
 					<Grid.Column width={4} style={{ textAlign: "center" }}>
 						<CartBill props={props} />
 						<Button
+							as={Link}
+							to="/payment"
 							primary
-							onClick={() => click(props.state)}
 							style={{ margin: "1em 0", textAlign: "center" }}
 						>
 							Sepeti Onayla
