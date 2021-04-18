@@ -1,157 +1,231 @@
-import React from "react";
-import {
-	Grid,
-	Segment,
-	Checkbox,
-	Container,
-	Input,
-	Button,
-	Label,
-} from "semantic-ui-react";
-import { Formik, Form, useField } from "formik";
-import * as Yup from "yup";
+import React, { useState } from "react";
+import { Container, Button, Form } from "semantic-ui-react";
+import { connect } from "react-redux";
+import { axiosCall } from "../../data";
+import CartBanner from "../shoppingcart/CartBanner";
+import { countries } from "../../gistfile1.json";
 
-const MyTextInput = ({ label, ...props }) => {
-	// useField() returns [formik.getFieldProps(), formik.getFieldMeta()]
-	// which we can spread on <input>. We can use field meta to show an error
-	// message if the field is invalid and it has been touched (i.e. visited)
-	const [field, meta] = useField(props);
+function PaymentBody(props) {
+	const INITIAL_STATE = {
+		name: "",
+		surname: "",
+		address: "",
+		phone: "",
+		email: "",
+		country: "Turkey",
+		state: "",
+		zip: "",
+		cardNumber: "",
+		day: 1,
+		month: 1,
+		cvc: "",
+		terms: false,
+	};
+
+	function submit(arg) {
+		return axiosCall("post", "/offer", arg)
+			.then((res) => console.log("answer", res))
+			.catch((err) => console.log("Baglanti Hatasi: Cart", err));
+	}
+
+	const [state, setState] = useState(INITIAL_STATE);
+	const stateHandler = (e, data) =>
+		setState({
+			...state,
+			[e.target.name]: e.target.value,
+			[data.name]: data.value,
+		});
+
+	const opt = [];
+	countries.forEach((each, index) => {
+		opt[index] = {};
+		opt[index].key = index;
+		opt[index].text = each.country;
+		opt[index].value = each.country;
+	});
+	const opt2 = [];
+	if (countries.some((each) => each.country === state.country)) {
+		countries
+			.find((each) => each.country === state.country)
+			.states.forEach((each, index) => {
+				opt2[index] = {};
+				opt2[index].key = index;
+				opt2[index].text = each;
+				opt2[index].value = each;
+			});
+	}
+	const optMonth = [];
+	for (let i = 0; i < 12; i++) {
+		optMonth[i] = { key: i, text: i + 1, value: i + 1 };
+	}
+	const optDay = [];
+	for (let i = 0; i < 31; i++) {
+		optDay[i] = { key: i, text: i + 1, value: i + 1 };
+	}
+	console.log("state", state);
 	return (
 		<>
-			<Input
-				label={label}
-				error={meta.touched && meta.error !== ""}
-				className="text-input"
-				{...field}
-				{...props}
-			/>
-			{meta.touched && meta.error ? (
-				<div className="error">{meta.error}</div>
-			) : null}
-		</>
-	);
-};
-
-const MyCheckbox = ({ children, ...props }) => {
-	// React treats radios and checkbox inputs differently other input types, select, and textarea.
-	// Formik does this too! When you specify `type` to useField(), it will
-	// return the correct bag of props for you -- a `checked` prop will be included
-	// in `field` alongside `name`, `value`, `onChange`, and `onBlur`
-	const [field, meta] = useField({ ...props, type: "checkbox" });
-
-	return (
-		<div>
-			<Checkbox label={children} type="checkbox" {...field} {...props} />
-
-			{meta.touched && meta.error ? (
-				<div className="error">{meta.error}</div>
-			) : null}
-		</div>
-	);
-};
-
-const MySelect = ({ label, ...props }) => {
-	const [field, meta] = useField(props);
-
-	return (
-		<div>
-			<Label htmlFor={props.id || props.name}>{label}</Label>
-			<select {...field} {...props} />
-			{meta.touched && meta.error ? (
-				<div className="error">{meta.error}</div>
-			) : null}
-		</div>
-	);
-};
-
-// And now we can use these
-
-const PaymentBody = () => {
-	return (
-		<>
-			<Container>
-				<h1>Subscribe!</h1>
-				<Segment>
-					<Formik
-						initialValues={{
-							firstName: "",
-							lastName: "",
-							email: "",
-							acceptedTerms: false, // added for our checkbox
-							jobType: "", // added for our select
-						}}
-						style={{ margin: "auto" }}
-						validationSchema={Yup.object({
-							firstName: Yup.string()
-								.max(15, "Must be 15 characters or less")
-								.required("Required"),
-							lastName: Yup.string()
-								.max(20, "Must be 20 characters or less")
-								.required("Required"),
-							email: Yup.string()
-								.email("Invalid email address")
-								.required("Required"),
-							acceptedTerms: Yup.boolean()
-								.required("Required")
-								.oneOf([true], "You must accept the terms and conditions."),
-							jobType: Yup.string()
-								.oneOf(
-									["designer", "development", "product", "other"],
-									"Invalid Job Type"
-								)
-								.required("Required"),
-						})}
-						onSubmit={(values, { setSubmitting }) => {
-							setTimeout(() => {
-								alert(JSON.stringify(values, null, 2));
-
-								setSubmitting(false);
-							}, 400);
-						}}
+			<Container style={{ margin: "3em 0 8em 0" }}>
+				<CartBanner select="card" />
+				<Form>
+					<Form.Group unstackable widths={2}>
+						<Form.Input
+							label="First name"
+							name="name"
+							value={state.name}
+							onChange={stateHandler}
+							placeholder="First name"
+							required
+						/>
+						<Form.Input
+							label="Last name"
+							name="surname"
+							value={state.surname}
+							onChange={stateHandler}
+							placeholder="Last name"
+							required
+						/>
+					</Form.Group>
+					<Form.Group widths={2}>
+						<Form.Input
+							label="Address"
+							name="address"
+							value={state.address}
+							onChange={stateHandler}
+							width={8}
+							placeholder="Address"
+							required
+						/>
+						<>
+							<Form.Input
+								label="Phone"
+								name="phone"
+								value={state.phone}
+								onChange={stateHandler}
+								width={4}
+								placeholder="Phone"
+								required
+							/>
+							<Form.Input
+								label="Email"
+								name="email"
+								value={state.email}
+								onChange={stateHandler}
+								width={4}
+								placeholder="Email"
+								type="email"
+								required
+							/>
+						</>
+					</Form.Group>
+					<Form.Group widths={3}>
+						<Form.Dropdown
+							search
+							selection
+							wrapSelection={false}
+							label="Country"
+							name="country"
+							placeholder="Country"
+							onChange={(e, data) => stateHandler(e, data)}
+							value={state.country}
+							options={opt}
+							required
+						/>
+						<Form.Dropdown
+							search
+							selection
+							wrapSelection={false}
+							label="State"
+							name="state"
+							placeholder="State"
+							onChange={(e, data) => stateHandler(e, data)}
+							value={state.state}
+							options={opt2}
+							required
+						/>
+						<Form.Input
+							label="Zip"
+							name="zip"
+							value={state.zip}
+							onChange={stateHandler}
+							placeholder="Zip"
+						/>
+					</Form.Group>
+					<Form.Group widths="equal">
+						<Form.Input
+							label="Card Number"
+							name="cardNumber"
+							value={state.cardNumber}
+							onChange={stateHandler}
+							width={6}
+							placeholder="4543 XXXX XXXX 1234"
+							required
+						/>
+						<>
+							<Form.Dropdown
+								search
+								selection
+								fluid
+								label="Day"
+								name="day"
+								width={4}
+								options={optDay}
+								onChange={(e, data) => stateHandler(e, data)}
+								value={state.day}
+								placeholder="DD"
+								required
+								wrapSelection={false}
+							/>
+							<Form.Dropdown
+								search
+								selection
+								fluid
+								label="Month"
+								name="month"
+								width={4}
+								options={optMonth}
+								onChange={(e, data) => stateHandler(e, data)}
+								value={state.month}
+								placeholder="MM"
+								required
+								wrapSelection={false}
+							/>
+						</>
+						<Form.Input
+							fluid
+							label="CVC"
+							name="cvc"
+							value={state.cvc}
+							onChange={stateHandler}
+							width={2}
+							placeholder="XXX"
+							type="password"
+							required
+						/>
+					</Form.Group>
+					<Form.Checkbox
+						label="I agree to the Terms and Conditions"
+						name="terms"
+						onClick={(e, data) => setState({ ...state, terms: data.checked })}
+						required
+					/>
+					<Button
+						type="submit"
+						onClick={() => submit({ ...props.cart, ...state })}
+						disabled={!state.terms}
 					>
-						<Form>
-							<Grid
-								columns="equal"
-								style={{ margin: "auto", textAlign: "center" }}
-							>
-								<MyTextInput
-									label="First Name"
-									name="firstName"
-									type="text"
-									placeholder="Jane"
-								/>
-
-								<MyTextInput
-									label="Last Name"
-									name="lastName"
-									type="text"
-									placeholder="Doe"
-								/>
-
-								<MyTextInput
-									label="Email Address"
-									name="email"
-									type="email"
-									placeholder="jane@formik.com"
-								/>
-								<MySelect label="Job Type" name="jobType">
-									<option value="">Select a job type</option>
-									<option value="designer">Designer</option>
-									<option value="development">Developer</option>
-									<option value="product">Product Manager</option>
-									<option value="other">Other</option>
-								</MySelect>
-								<MyCheckbox name="acceptedTerms">
-									I accept the terms and conditions
-								</MyCheckbox>
-								<Button type="submit">Submit</Button>
-							</Grid>
-						</Form>
-					</Formik>
-				</Segment>
+						Submit
+					</Button>
+				</Form>
 			</Container>
 		</>
 	);
+}
+
+const mapStateToProps = (state) => {
+	return {
+		cart: state.cart,
+	};
 };
 
-export default PaymentBody;
+export default connect(mapStateToProps)(PaymentBody);
