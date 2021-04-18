@@ -24,21 +24,6 @@ function CardComponent(props) {
 					)
 			);
 	}, [props.state, props.category]);
-	// useEffect(() => {
-	// 	if (props.state)
-	// 		setState(
-	// 			props.state.filter(
-	// 				(item, index, self) =>
-	// 					index ===
-	// 						self.findIndex(
-	// 							(e) =>
-	// 								e.productHeader === item.productHeader &&
-	// 								e.stock > 0 &&
-	// 								e.publish
-	// 						) && item.category === "elbise"
-	// 			)
-	// 		);
-	// }, [props.state]);
 
 	return state.map &&
 		state.filter((item) => item.category === props.category && item.publish)
@@ -64,4 +49,5 @@ function CardComponent(props) {
 		<PlaceHolder />
 	);
 }
+
 export default CardComponent;
