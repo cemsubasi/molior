@@ -1,4 +1,5 @@
 import { createMedia } from "@artsy/fresnel";
+import { useLocation } from "react-router-dom";
 import PropTypes from "prop-types";
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
@@ -30,6 +31,8 @@ const DesktopContainer = ({ children }) => {
 	const showFixedMenu = () => setState({ fixed: true });
 
 	const { fixed } = state;
+	const { pathname } = useLocation();
+	console.log(pathname);
 
 	return (
 		<Media greaterThan="mobile">
@@ -50,10 +53,10 @@ const DesktopContainer = ({ children }) => {
 						<Menu.Item as={Link} to="/">
 							Ana Sayfa
 						</Menu.Item>
-						<Menu.Item as={Link} to="/neva" active>
+						<Menu.Item as={Link} to="/neva" active={pathname === "/neva"}>
 							Neva
 						</Menu.Item>
-						<Menu.Item as={Link} to="/orders">
+						<Menu.Item as={Link} to="/orders" active={pathname === "/orders"}>
 							Siparişler
 						</Menu.Item>
 					</Container>
@@ -76,6 +79,7 @@ const MobileContainer = ({ children }) => {
 	const handleToggle = () => setState({ sidebarOpened: true });
 
 	const { sidebarOpened } = state;
+	const { pathname } = useLocation();
 
 	return (
 		<Media as={Sidebar.Pushable} at="mobile">
@@ -91,10 +95,10 @@ const MobileContainer = ({ children }) => {
 					<Menu.Item as={Link} to="/" active>
 						Ana Sayfa
 					</Menu.Item>
-					<Menu.Item as={Link} to="/neva">
+					<Menu.Item as={Link} to="/neva" active={pathname === "/neva"}>
 						Neva
 					</Menu.Item>
-					<Menu.Item as={Link} to="/orders">
+					<Menu.Item as={Link} to="/orders" active={pathname === "/orders"}>
 						Siparişler
 					</Menu.Item>
 				</Sidebar>
