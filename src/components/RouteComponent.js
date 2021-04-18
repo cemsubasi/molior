@@ -14,6 +14,7 @@ import DiscountsContainer from "./products/DiscountsContainer";
 import CartContainer from "./shoppingcart/CartContainer";
 import PaymentContainer from "./paymentpage/PaymentContainer";
 import SuperTest from "./superpage/SuperTest";
+import SuperOrders from "./superpage/SuperOrders";
 import Page404 from "../common/404";
 import { url3 } from "../data";
 
@@ -31,6 +32,7 @@ const RouteComponent = (props) => {
 					<Route path="/sepet" component={CartContainer} />
 					<Route path="/supertest" component={SuperTest} />
 					<Route path="/payment" component={PaymentContainer} />
+					<Route path="/orders" component={SuperOrders} />
 					<Route
 						path={url3}
 						render={() =>
