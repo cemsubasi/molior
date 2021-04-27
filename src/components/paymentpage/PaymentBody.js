@@ -3,6 +3,7 @@ import { Container, Button, Form } from "semantic-ui-react";
 import { connect } from "react-redux";
 import { axiosCall } from "../../data";
 import CartBanner from "../shoppingcart/CartBanner";
+import Dimmer from "../../common/Dimmer";
 import { countries } from "../../gistfile1.json";
 
 function PaymentBody(props) {
@@ -23,12 +24,13 @@ function PaymentBody(props) {
 	};
 
 	function submit(arg) {
-		return axiosCall("post", "/offer", arg)
-			.then((res) => console.log("answer", res))
+		return axiosCall("post", "/order", arg)
+			.then(dimmerHandler)
 			.catch((err) => console.log("Baglanti Hatasi: Cart", err));
 	}
 
 	const [state, setState] = useState(INITIAL_STATE);
+	const [dimmer, setDimmer] = useState(false);
 	const stateHandler = (e, data) =>
 		setState({
 			...state,
@@ -62,9 +64,14 @@ function PaymentBody(props) {
 	for (let i = 0; i < 31; i++) {
 		optDay[i] = { key: i, text: i + 1, value: i + 1 };
 	}
+	const dimmerHandler = () => {
+		setDimmer(true);
+		setTimeout(() => setDimmer(false), 2000);
+	};
 	console.log("state", state);
 	return (
 		<>
+			<Dimmer open={dimmer} />
 			<Container style={{ margin: "3em 0 8em 0" }}>
 				<CartBanner select="card" />
 				<Form>
@@ -211,7 +218,14 @@ function PaymentBody(props) {
 					/>
 					<Button
 						type="submit"
-						onClick={() => submit({ ...props.cart, ...state })}
+						onClick={() => {
+							submit({
+								cart: props.cart.map((item) =>
+									item ? { ...item, images: "", status: "none" } : item
+								),
+								credentials: { ...state, orderId: Date.now() },
+							});
+						}}
 						disabled={!state.terms}
 					>
 						Submit
