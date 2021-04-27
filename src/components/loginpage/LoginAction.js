@@ -8,7 +8,7 @@ export const setAdmin = (arg) => (dispatch) => {
 				type: "SET_ERR",
 				payload: {
 					status: true,
-					classname: "alert alert-danger",
+					name: "negative",
 					message: "Baglanti Hatasi",
 				},
 			})
