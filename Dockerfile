@@ -2,4 +2,6 @@ FROM node:14-slim
 WORKDIR /opt/molior-client/
 COPY . .
 RUN npm install
-CMD npm start
+RUN npm i -g live-server
+RUN npm run build
+CMD live-server --port=3000 build/
