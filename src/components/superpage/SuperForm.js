@@ -20,6 +20,7 @@ const SuperForm = (props) => {
 		productHeader: "",
 		productBody: "",
 		price: 0,
+		totalPrice: 0,
 		size: "",
 		stock: 0,
 		category: "",
@@ -70,9 +71,21 @@ const SuperForm = (props) => {
 		// eslint-disable-next-line
 		[inputState.category, setInputState]
 	);
+	useEffect(
+		() => {
+			setInputState({
+				...inputState,
+				totalPrice: (
+					(inputState.price * (100 - inputState.discount)) /
+					100
+				).toFixed(2),
+			});
+		},
+		// eslint-disable-next-line
+		[inputState.price, inputState.discount]
+	);
 
 	console.log("inputState", inputState);
-	console.log("images", images);
 	const Submit = () => {
 		//if there is one other with same url then edit that object
 		if (props.state.some((user) => user.id === inputState.id)) {
