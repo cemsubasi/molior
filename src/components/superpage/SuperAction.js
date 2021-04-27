@@ -1,12 +1,12 @@
 import { axiosCall, url2, url4, url5 } from "../../data";
 const succObj = {
 	status: true,
-	classname: "alert alert-success",
+	name: "success",
 	message: "İşlem başarıyla tamamlandı!",
 };
 const errObj = {
 	status: true,
-	classname: "alert alert-danger",
+	name: "negative",
 	message: "Hata",
 };
 export const setErr = (arg, dispatch) => {
@@ -14,7 +14,7 @@ export const setErr = (arg, dispatch) => {
 		() =>
 			dispatch({
 				type: "SET_ERR",
-				payload: { status: false, classname: "", message: "", error: {} },
+				payload: { status: false, name: "", message: "", error: {} },
 			}),
 		3000
 	);
@@ -65,6 +65,7 @@ export const replacePost = (arg) => (dispatch) => {
 		shipping: arg.shipping,
 		size: arg.size,
 		price: arg.price,
+		totalPrice: arg.totalPrice,
 		category: arg.category,
 		collect: arg.collect,
 		stock: arg.stock,
