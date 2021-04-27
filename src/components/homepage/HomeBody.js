@@ -9,7 +9,9 @@ import {
 	Image,
 	Segment,
 } from "semantic-ui-react";
-import logo from "../../images/molior8.png";
+import home_elbise from "../../images/home_elbise.png";
+import home_ust from "../../images/home_ust.png";
+import home_alt from "../../images/home_alt.png";
 import logo2 from "../../images/molior2.png";
 
 const HomeBody = () => {
@@ -20,7 +22,7 @@ const HomeBody = () => {
 					<Grid.Row>
 						<Grid.Column width={8}>
 							<Header as="h3" style={{ fontSize: "2em" }}>
-								Elbise
+								Elbise Modelleri
 							</Header>
 							<p style={{ fontSize: "1.33em" }}>
 								Beğenebileceğinizi düşündüğümüz en yeni elbise modellerini
@@ -35,10 +37,12 @@ const HomeBody = () => {
 						</Grid.Column>
 						<Grid.Column floated="right" width={6}>
 							<Image
+								as={Link}
+								to="/elbise"
 								bordered
 								rounded
 								size="large"
-								src="https://glamshops.ro/pics/reviews/emami-scandinavian-design.jpg"
+								src={home_elbise}
 							/>
 						</Grid.Column>
 					</Grid.Row>
@@ -81,14 +85,14 @@ const HomeBody = () => {
 								bordered
 								rounded
 								size="large"
-								src={logo2}
+								src={home_ust}
 								as={Link}
 								to="/ust-giyim"
 							/>
 						</Grid.Column>
 						<Grid.Column width={8}>
 							<Header as="h3" style={{ fontSize: "2em" }}>
-								Üst Giyim
+								Üst Giyim Modelleri
 							</Header>
 							<p style={{ fontSize: "1.33em" }}>
 								Beğenebileceğinizi düşündüğümüz en yeni üst giyim modellerini
@@ -123,7 +127,7 @@ const HomeBody = () => {
 					<Grid.Row>
 						<Grid.Column width={8}>
 							<Header as="h3" style={{ fontSize: "2em" }}>
-								Alt Giyim
+								Alt Giyim Modelleri
 							</Header>
 							<p style={{ fontSize: "1.33em" }}>
 								Beğenebileceğinizi düşündüğümüz en yeni alt giyim modellerini
@@ -154,7 +158,7 @@ const HomeBody = () => {
 								as={Link}
 								to="/alt-giyim"
 								size="large"
-								src={logo}
+								src={home_alt}
 							/>
 						</Grid.Column>
 					</Grid.Row>
