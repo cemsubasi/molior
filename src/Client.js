@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import RouteComponent from "./components/RouteComponent";
@@ -11,15 +11,12 @@ import "./css/blog.css";
 import "./css/signin.css";
 
 const Client = (props) => {
-	useEffect(
-		() => {
-			props.fetchPosts();
-			if (JSON.parse(localStorage.getItem("cart")))
-				props.add2storage(JSON.parse(localStorage.getItem("cart")));
-		},
-		// eslint-disable-next-line
-		[]
-	);
+	const ref = useRef(props);
+	useEffect(() => {
+		ref.current.fetchPosts();
+		if (JSON.parse(localStorage.getItem("cart")))
+			ref.current.add2storage(JSON.parse(localStorage.getItem("cart")));
+	}, []);
 	useEffect(() => localStorage.setItem("cart", JSON.stringify(props.cart)), [
 		props.cart,
 	]);
