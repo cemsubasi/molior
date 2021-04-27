@@ -49,7 +49,9 @@ function CartItem({ props, item }) {
 									{item.price + " TL"}
 								</span>
 								<span>
-									{+item.price - (+item.price * item.discount) / 100 + " TL"}
+									{(+item.price - (+item.price * item.discount) / 100).toFixed(
+										2
+									) + " TL"}
 								</span>
 							</React.Fragment>
 						) : (
