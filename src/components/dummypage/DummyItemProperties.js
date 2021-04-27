@@ -59,6 +59,8 @@ function DummyItemProperties({
 					<p floated="left" style={{ fontSize: "1.33em" }}>
 						Beden:
 					</p>
+				</Grid.Row>
+				<Grid.Row>
 					<div>
 						{props.state
 							.filter(
