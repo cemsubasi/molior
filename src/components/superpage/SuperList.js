@@ -235,15 +235,11 @@ const SuperList = (props) => {
 
 SuperList.propTypes = {
 	state: PropTypes.array,
-	editState: PropTypes.object,
-	errState: PropTypes.object,
 };
 
 const mapStateToProps = (state) => {
 	return {
 		state: state.postState,
-		editState: state.editState,
-		errState: state.errState,
 	};
 };
 
