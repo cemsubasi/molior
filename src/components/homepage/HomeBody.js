@@ -12,7 +12,6 @@ import {
 import home_elbise from "../../images/home_elbise.png";
 import home_ust from "../../images/home_ust.png";
 import home_alt from "../../images/home_alt.png";
-import logo2 from "../../images/molior2.png";
 
 const HomeBody = () => {
 	return (
