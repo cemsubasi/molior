@@ -1,5 +1,5 @@
 FROM node:14-slim
-WORKDIR /opt/molior-client/
+WORKDIR /opt/molior/client/
 COPY . .
 RUN npm install
 RUN npm i -g live-server
