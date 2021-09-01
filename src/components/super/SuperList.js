@@ -8,7 +8,7 @@ import {
 	editPost,
 	handleStock,
 	setTest,
-} from "./SuperAction";
+} from "./superAction";
 import {
 	Button,
 	Icon,

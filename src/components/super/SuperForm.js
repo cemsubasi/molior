@@ -7,7 +7,7 @@ import {
 	featuredPost,
 	replacePost,
 	editPost,
-} from "./SuperAction";
+} from "./superAction";
 import ImageUploading from "react-images-uploading";
 import { dateParsed } from "../../config";
 import { Container, Select, Input, Form, Button } from "semantic-ui-react";

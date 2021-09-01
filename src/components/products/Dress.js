@@ -1,15 +1,15 @@
 import React from "react";
-import Bottoms from "./Bottoms";
+import DressBody from "./DressBody";
 import HeaderComponent from "../../common/HeaderComponent";
 import Footer from "../../common/Footer";
 
-function BottomsContainer() {
+function Dress() {
 	return (
 		<HeaderComponent>
-			<Bottoms />
+			<DressBody />
 			<Footer />
 		</HeaderComponent>
 	);
 }
 
-export default BottomsContainer;
+export default Dress;

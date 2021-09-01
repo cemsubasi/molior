@@ -1,15 +1,15 @@
 import React from "react";
-import Tops from "./Tops";
+import TopBody from "./TopBody";
 import HeaderComponent from "../../common/HeaderComponent";
 import Footer from "../../common/Footer";
 
-function TopsContainer() {
+function Top() {
 	return (
 		<HeaderComponent>
-			<Tops />
+			<TopBody />
 			<Footer />
 		</HeaderComponent>
 	);
 }
 
-export default TopsContainer;
+export default Top;

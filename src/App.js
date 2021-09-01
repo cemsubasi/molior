@@ -2,8 +2,8 @@ import React, { useEffect, useRef } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import RouteComponent from "./components/RouteComponent";
-import { fetchPosts } from "./components/homepage/HomeAction";
-import { add2storage } from "./components/dummypage/DummyAction";
+import { fetchPosts } from "./components/home/homeAction";
+import { add2storage } from "./components/dummy/dummyAction";
 
 import "semantic-ui-css/semantic.min.css";
 import "./css/App.css";

@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { useLocation } from "react-router-dom";
 import { connect } from "react-redux";
 import { Reveal, Image, Grid } from "semantic-ui-react";
-import { add2cart } from "./DummyAction";
+import { add2cart } from "./dummyAction";
 import DummyItemProperties from "./DummyItemProperties";
 
 const DummyBody = (props) => {

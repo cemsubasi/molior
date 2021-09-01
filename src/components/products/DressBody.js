@@ -4,27 +4,30 @@ import { Header, Container, Grid } from "semantic-ui-react";
 import { connect } from "react-redux";
 import CardComponent from "../../common/CardComponent";
 
-function UstGiyim(props) {
+function DressBody(props) {
 	return (
 		<React.Fragment>
-			<Header style={{ marginBottom: "35px", textAlign: "center" }}>
-				Üst giyim kategorisi için bulunan sonuçlar
+			<Header as="h3" style={{ marginBottom: "35px", textAlign: "center" }}>
+				Elbise kategorisi için bulunan sonuçlar
 			</Header>
 			<Container style={{ marginBottom: "50px " }}>
 				<Grid>
-					<CardComponent {...props} category="ust-giyim" />
+					<CardComponent {...props} category="elbise" />
 				</Grid>
 			</Container>
 		</React.Fragment>
 	);
 }
-UstGiyim.propTypes = {
+
+DressBody.propTypes = {
 	state: PropTypes.array,
+	cart: PropTypes.array,
 };
 const mapStateToProps = (state) => {
 	return {
 		state: state.postState,
+		cart: state.cart,
 	};
 };
 
-export default connect(mapStateToProps)(UstGiyim);
+export default connect(mapStateToProps)(DressBody);

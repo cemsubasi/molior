@@ -4,7 +4,7 @@ import { Header, Container, Grid } from "semantic-ui-react";
 import { connect } from "react-redux";
 import CardComponent from "../../common/CardComponent";
 
-function Bottoms(props) {
+function BottomBody(props) {
 	return (
 		<React.Fragment>
 			<Header style={{ marginBottom: "35px", textAlign: "center" }}>
@@ -19,7 +19,7 @@ function Bottoms(props) {
 	);
 }
 
-Bottoms.propTypes = {
+BottomBody.propTypes = {
 	state: PropTypes.array,
 };
 const mapStateToProps = (state) => {
@@ -28,4 +28,4 @@ const mapStateToProps = (state) => {
 	};
 };
 
-export default connect(mapStateToProps)(Bottoms);
+export default connect(mapStateToProps)(BottomBody);

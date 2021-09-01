@@ -4,7 +4,7 @@ import HeaderComponent from "../../common/HeaderComponent";
 import Footer from "../../common/Footer";
 import DummyBody from "./DummyBody";
 
-const DummyPageContainer = (props) => {
+const Dummy = (props) => {
 	return (
 		<HeaderComponent>
 			<DummyBody />
@@ -19,4 +19,4 @@ const mapStateToProps = (state) => {
 	};
 };
 
-export default connect(mapStateToProps)(DummyPageContainer);
+export default connect(mapStateToProps)(Dummy);

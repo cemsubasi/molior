@@ -1,15 +1,15 @@
 import React from "react";
-import Discounts from "./Discounts";
+import BottomBody from "./BottomBody";
 import HeaderComponent from "../../common/HeaderComponent";
 import Footer from "../../common/Footer";
 
-function DiscountsContainer() {
+function Bottom() {
 	return (
 		<HeaderComponent>
-			<Discounts />
+			<BottomBody />
 			<Footer />
 		</HeaderComponent>
 	);
 }
 
-export default DiscountsContainer;
+export default Bottom;

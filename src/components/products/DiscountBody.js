@@ -51,7 +51,7 @@ CardComponent.propTypes = {
 	props: PropTypes.array,
 };
 
-function Discounts(props) {
+function DiscountBody(props) {
 	return (
 		<React.Fragment>
 			<Header style={{ marginBottom: "35px", textAlign: "center" }}>
@@ -65,7 +65,7 @@ function Discounts(props) {
 		</React.Fragment>
 	);
 }
-Discounts.propTypes = {
+DiscountBody.propTypes = {
 	state: PropTypes.array,
 };
 const mapStateToProps = (state) => {
@@ -74,4 +74,4 @@ const mapStateToProps = (state) => {
 	};
 };
 
-export default connect(mapStateToProps)(Discounts);
+export default connect(mapStateToProps)(DiscountBody);

@@ -2,7 +2,7 @@ import { useState } from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
-import { setAdmin } from "./LoginAction";
+import { setAdmin } from "./loginAction";
 import { url3 } from "../../config";
 
 import logo from "../../images/logo1.svg";
