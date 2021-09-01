@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Container, Button, Form } from "semantic-ui-react";
 import { connect } from "react-redux";
-import { axiosCall } from "../../data";
+import { axiosCall } from "../../config";
 import CartBanner from "../shoppingcart/CartBanner";
 import Dimmer from "../../common/Dimmer";
 import { countries } from "../../gistfile1.json";

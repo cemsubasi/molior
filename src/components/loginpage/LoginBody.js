@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { setAdmin } from "./LoginAction";
-import { url3 } from "../../data";
+import { url3 } from "../../config";
 
 import logo from "../../images/logo1.svg";
 

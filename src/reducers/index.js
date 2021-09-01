@@ -1,4 +1,4 @@
-import { data } from "../data";
+import { data } from "../config";
 
 export const reducer = (state = data, action) => {
 	switch (action.type) {

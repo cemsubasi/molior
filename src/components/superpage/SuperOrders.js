@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import SuperHeader from "./SuperHeader";
-import { axiosCall } from "../../data";
+import { axiosCall } from "../../config";
 import { Popup, Image, Icon, Container, Table } from "semantic-ui-react";
 
 function SuperOrders(props) {

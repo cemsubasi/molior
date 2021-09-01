@@ -1,4 +1,4 @@
-import { axiosCall, url } from "../../data";
+import { axiosCall, url } from "../../config";
 
 export const fetchPosts = () => (dispatch) => {
 	axiosCall("get", url)

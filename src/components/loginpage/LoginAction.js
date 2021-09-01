@@ -1,4 +1,4 @@
-import { axiosCall, url3 } from "../../data";
+import { axiosCall, url3 } from "../../config";
 
 export const setAdmin = (arg) => (dispatch) => {
 	axiosCall("post", url3, arg)

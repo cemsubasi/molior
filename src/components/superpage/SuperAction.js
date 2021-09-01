@@ -1,4 +1,4 @@
-import { axiosCall, url2, url4, url5 } from "../../data";
+import { axiosCall, url2, url4, url5 } from "../../config";
 const succObj = {
 	status: true,
 	name: "success",

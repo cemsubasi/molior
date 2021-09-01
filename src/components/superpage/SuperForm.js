@@ -9,7 +9,7 @@ import {
 	editPost,
 } from "./SuperAction";
 import ImageUploading from "react-images-uploading";
-import { dateParsed } from "../../data";
+import { dateParsed } from "../../config";
 import { Container, Select, Input, Form, Button } from "semantic-ui-react";
 import Alert from "../../common/Alert";
 
