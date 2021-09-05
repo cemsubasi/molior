@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import RouteComponent from "./components/RouteComponent";
+import Root from "./components/Root";
 import { fetchPosts } from "./components/home/homeAction";
 import { add2storage } from "./components/dummy/dummyAction";
 
@@ -21,7 +21,7 @@ const Client = (props) => {
 		props.cart,
 	]);
 
-	return <RouteComponent />;
+	return <Root />;
 };
 
 Client.propTypes = {

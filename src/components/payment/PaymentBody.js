@@ -77,49 +77,49 @@ function PaymentBody(props) {
 				<Form>
 					<Form.Group unstackable widths={2}>
 						<Form.Input
-							label="First name"
+							label="Ad"
 							name="name"
 							value={state.name}
 							onChange={stateHandler}
-							placeholder="First name"
+							placeholder="Ad"
 							required
 						/>
 						<Form.Input
-							label="Last name"
+							label="Soyad"
 							name="surname"
 							value={state.surname}
 							onChange={stateHandler}
-							placeholder="Last name"
+							placeholder="Soyadınız"
 							required
 						/>
 					</Form.Group>
 					<Form.Group widths={2}>
 						<Form.Input
-							label="Address"
+							label="Adres"
 							name="address"
 							value={state.address}
 							onChange={stateHandler}
 							width={8}
-							placeholder="Address"
+							placeholder="Adres"
 							required
 						/>
 						<>
 							<Form.Input
-								label="Phone"
+								label="Telefon"
 								name="phone"
 								value={state.phone}
 								onChange={stateHandler}
 								width={4}
-								placeholder="Phone"
+								placeholder="Telefon"
 								required
 							/>
 							<Form.Input
-								label="Email"
+								label="E-posta"
 								name="email"
 								value={state.email}
 								onChange={stateHandler}
 								width={4}
-								placeholder="Email"
+								placeholder="E-posta"
 								type="email"
 								required
 							/>
@@ -130,9 +130,9 @@ function PaymentBody(props) {
 							search
 							selection
 							wrapSelection={false}
-							label="Country"
+							label="İl"
 							name="country"
-							placeholder="Country"
+							placeholder="İl"
 							onChange={(e, data) => stateHandler(e, data)}
 							value={state.country}
 							options={opt}
@@ -142,25 +142,25 @@ function PaymentBody(props) {
 							search
 							selection
 							wrapSelection={false}
-							label="State"
+							label="İlçe"
 							name="state"
-							placeholder="State"
+							placeholder="İlçe"
 							onChange={(e, data) => stateHandler(e, data)}
 							value={state.state}
 							options={opt2}
 							required
 						/>
 						<Form.Input
-							label="Zip"
+							label="Posta Kodu"
 							name="zip"
 							value={state.zip}
 							onChange={stateHandler}
-							placeholder="Zip"
+							placeholder="Posta Kodu"
 						/>
 					</Form.Group>
 					<Form.Group widths="equal">
 						<Form.Input
-							label="Card Number"
+							label="Kart Numarası"
 							name="cardNumber"
 							value={state.cardNumber}
 							onChange={stateHandler}
@@ -173,13 +173,13 @@ function PaymentBody(props) {
 								search
 								selection
 								fluid
-								label="Day"
+								label="Gün"
 								name="day"
 								width={4}
 								options={optDay}
 								onChange={(e, data) => stateHandler(e, data)}
 								value={state.day}
-								placeholder="DD"
+								placeholder="GG"
 								required
 								wrapSelection={false}
 							/>
@@ -187,13 +187,13 @@ function PaymentBody(props) {
 								search
 								selection
 								fluid
-								label="Month"
+								label="Ay"
 								name="month"
 								width={4}
 								options={optMonth}
 								onChange={(e, data) => stateHandler(e, data)}
 								value={state.month}
-								placeholder="MM"
+								placeholder="AA"
 								required
 								wrapSelection={false}
 							/>
@@ -211,7 +211,7 @@ function PaymentBody(props) {
 						/>
 					</Form.Group>
 					<Form.Checkbox
-						label="I agree to the Terms and Conditions"
+						label="Gizlilik sözleşmesi ve kullanım koşullarını okudum kabul ettim."
 						name="terms"
 						onClick={(e, data) => setState({ ...state, terms: data.checked })}
 						required
@@ -228,7 +228,7 @@ function PaymentBody(props) {
 						}}
 						disabled={!state.terms}
 					>
-						Submit
+						Onayla
 					</Button>
 				</Form>
 			</Container>

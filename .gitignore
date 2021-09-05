@@ -1,5 +1,4 @@
-node_modules
-src/data.js
-src/ssl/
-src/trash/
 build/
+node_modules
+src/config.js
+.eslintcache

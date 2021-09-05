@@ -19,6 +19,15 @@ import SuperOrders from "./super/SuperOrders";
 import Page404 from "../common/404";
 import { url3 } from "../config";
 
+const PrivateRoute = ({ props }) => {
+	return (
+		<Route
+			path={url3}
+			render={() => (props.isAdmin === true ? <Super /> : <Login />)}
+		/>
+	);
+};
+
 const RouteComponent = (props) => {
 	return (
 		<Router>
@@ -34,11 +43,8 @@ const RouteComponent = (props) => {
 					<Route path="/supertest" component={SuperTest} />
 					<Route path="/payment" component={Payment} />
 					<Route path="/orders" component={SuperOrders} />
-					<Route
-						path={url3}
-						render={() => (props.isAdmin === true ? <Super /> : <Login />)}
-					/>
 					<Route path="/:slug" component={Dummy} />
+					<PrivateRoute props={props} />
 					<Route path="*" component={Page404} />
 				</Switch>
 			</React.Fragment>
