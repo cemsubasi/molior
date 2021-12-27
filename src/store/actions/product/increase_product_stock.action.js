@@ -1,0 +1,8 @@
+export const INCREASE_PRODUCT_STOCK = 'INCREASE_PRODUCT_STOCK';
+export const INCREASE_PRODUCT_STOCK_SUCCESS = 'INCREASE_PRODUCT_STOCK_SUCCESS';
+export const INCREASE_PRODUCT_STOCK_ERROR = 'INCREASE_PRODUCT_STOCK_ERROR';
+
+export const IncreaseProductStock = (data) => ({
+  type: INCREASE_PRODUCT_STOCK,
+  payload: data,
+});

@@ -1,40 +1,25 @@
-import React, { useEffect, useRef } from "react";
-import PropTypes from "prop-types";
-import { connect } from "react-redux";
-import Root from "./components/Root";
-import { fetchPosts } from "./components/home/homeAction";
-import { add2storage } from "./components/dummy/dummyAction";
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
-import "semantic-ui-css/semantic.min.css";
-import "./css/App.css";
-import "./css/blog.css";
-import "./css/signin.css";
+import Root from './components/Root';
+import { AddToCart, GetAllProducts, GetAllCartItems } from './store/actions';
 
-const Client = (props) => {
-	const ref = useRef(props);
-	useEffect(() => {
-		ref.current.fetchPosts();
-		if (JSON.parse(localStorage.getItem("cart")))
-			ref.current.add2storage(JSON.parse(localStorage.getItem("cart")));
-	}, []);
-	useEffect(() => localStorage.setItem("cart", JSON.stringify(props.cart)), [
-		props.cart,
-	]);
+import 'semantic-ui-css/semantic.min.css';
+import './assets/css/App.css';
+import './assets/css/blog.css';
+import './assets/css/signin.css';
 
-	return <Root />;
+const App = () => {
+  const dispatch = useDispatch();
+  const cart = useSelector((state) => state.cart.data);
+  useEffect(() => {
+    dispatch(GetAllProducts());
+    if (JSON.parse(localStorage.getItem('cart')))
+      dispatch(GetAllCartItems(JSON.parse(localStorage.getItem('cart'))));
+  }, []);
+  useEffect(() => localStorage.setItem('cart', JSON.stringify(cart)), [cart]);
+
+  return <Root />;
 };
 
-Client.propTypes = {
-	postState: PropTypes.array,
-	cart: PropTypes.array,
-	fetchPosts: PropTypes.func,
-	add2storage: PropTypes.func,
-};
-
-const mapStateToProps = (state) => {
-	return {
-		postState: state.postState,
-		cart: state.cart,
-	};
-};
-export default connect(mapStateToProps, { fetchPosts, add2storage })(Client);
+export default App;

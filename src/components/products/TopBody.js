@@ -1,30 +1,20 @@
-import React from "react";
-import PropTypes from "prop-types";
-import { Header, Container, Grid } from "semantic-ui-react";
-import { connect } from "react-redux";
-import CardComponent from "../../common/CardComponent";
+import React from 'react';
+import { Header, Container, Grid } from 'semantic-ui-react';
+import CardComponent from '../../common/CardComponent';
 
-function TopBody(props) {
-	return (
-		<React.Fragment>
-			<Header style={{ marginBottom: "35px", textAlign: "center" }}>
-				Üst giyim kategorisi için bulunan sonuçlar
-			</Header>
-			<Container style={{ marginBottom: "50px " }}>
-				<Grid>
-					<CardComponent {...props} category="ust-giyim" />
-				</Grid>
-			</Container>
-		</React.Fragment>
-	);
+function TopBody() {
+  return (
+    <React.Fragment>
+      <Header style={{ marginBottom: '35px', textAlign: 'center' }}>
+        Üst giyim kategorisi için bulunan sonuçlar
+      </Header>
+      <Container style={{ marginBottom: '50px ' }}>
+        <Grid>
+          <CardComponent category="ust-giyim" />
+        </Grid>
+      </Container>
+    </React.Fragment>
+  );
 }
-TopBody.propTypes = {
-	state: PropTypes.array,
-};
-const mapStateToProps = (state) => {
-	return {
-		state: state.postState,
-	};
-};
 
-export default connect(mapStateToProps)(TopBody);
+export default TopBody;
